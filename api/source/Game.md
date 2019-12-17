@@ -172,6 +172,7 @@ console.log(Game.time);
 
 System game tick counter. It is automatically incremented on every tick. <a href="/game-loop.html">Learn more</a>
 
+# Game.cpu
 
 {% api_method Game.cpu.getHeapStatistics '' 1 %}
 

@@ -18,15 +18,17 @@
   $(bind);
 
   function populate() {
+	console.time('populateSearch');
     $('h1, h2').each(function() {
       var title = $(this);
-      var body = title.nextUntil('h1, h2');
-      index.add({
-        id: title.prop('id'),
-        title: title.text(),
+	  var body = title.nextUntil('h1, h2');	  
+	  index.add({
+		id: title.prop('dataset').id || title.prop('id'),
+        title: title.prop('dataset').name || title.text(),
         body: body.text()
-      });
-    });
+	  });      
+	});
+	console.timeEnd('populateSearch');
   }
 
   function bind() {
@@ -51,8 +53,10 @@
       if (results.length) {
         searchResults.empty();
         $.each(results, function (index, result) {
-          var elem = document.getElementById(result.ref);
+		  var elem = document.getElementById(result.ref);
           searchResults.append("<li><a href='#" + result.ref + "'>" + $(elem).text() + "</a></li>");
+		  const name = $(elem).prop('dataset').name || result.ref;
+          searchResults.append("<li><a href='#" + result.ref + "'>" + name + "</a></li>");
         });
         highlight.call(this);
       } else {

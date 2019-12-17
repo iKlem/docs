@@ -187,7 +187,7 @@ html, body {
   }
 
 
-  .tocify-item>a, .toc-footer li {
+  .tocify-item a, .toc-footer li {
     @extend %code-font-family;
     padding: 0 $nav-padding 0 $nav-padding;
     display: block;
@@ -198,8 +198,8 @@ html, body {
     color: inherit;
   }
 
-  .tocify-item {
-    &--api-property a::before, &--api-method a::before {
+  .tocify-item a {	
+	  .api-property::before {
       content: '';
       display: inline-block;
       width: 10px;
@@ -209,16 +209,16 @@ html, body {
       position: relative;
       top: 1px;
     }
-    &--api-property a::before {
+    .api-property--property::before {
       background-position-y: -10px;
     }
-    &--api-method a::before {
+    .api-property--method::before {
       background-position-y: 0;
     }
-    &--api-inherited a::before {
+    .api-property--inherited::before {
       background-position-x: -10px;
     }
-    &--api-deprecated {
+    .api-property--deprecated {
       text-decoration: line-through;
     }
   }
@@ -233,10 +233,20 @@ html, body {
     line-height: 28px;
   }
 
+  a.divider {
+	pointer-events: none !important;
+	padding-left: $nav-padding;
+	color: #999;
+	text-transform: uppercase;
+	font-size: .8em;
+	margin-top: 1em;
+	cursor: default !important;
+  }
+
   li {
     color: $nav-text;
 
-    &.divider {
+    &.divider, .tocify-item .divider {
       padding-left: $nav-padding;
       color: #999;
       text-transform: uppercase;
@@ -247,18 +257,18 @@ html, body {
   }
 
   // This is the currently selected ToC entry
-  .tocify-focus {
+  .tocify-header.is-active-link {
     background-color: $nav-active-bg;
     color: $nav-active-text;
   }
 
   // Subheaders are the submenus that slide open
   // in the table of contents.
-  .tocify-subheader {
-    display: none; // tocify will override this when needed
+  .toc-list.is-collapsible {
+    // display: none; // tocify will override this when needed
     background-color: $nav-subitem-bg;
     font-weight: 500;
-    .tocify-item>a {
+    .tocify-item > a {
       padding-left: $nav-padding + $nav-indent;
       font-size: 13px;
       line-height: 22px;
@@ -267,6 +277,10 @@ html, body {
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
+  }
+
+  .is-collapsible:not(.is-collapsed) {
+	 max-height: none;
   }
 
   .toc-footer {
@@ -887,7 +901,7 @@ html, body {
     display: block;
   }
 
-  .tocify-wrapper .tocify-item > a {
+  .tocify-wrapper .tocify-item a {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
   }

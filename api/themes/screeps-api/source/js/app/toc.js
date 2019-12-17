@@ -3,56 +3,59 @@
 //= require ../lib/_jquery.tocify
 //= require ../lib/_imagesloaded.min
 (function (global) {
-  'use strict';
+	'use strict';
 
-  var closeToc = function() {
-    $(".tocify-wrapper").removeClass('open');
-    $("#nav-button").removeClass('open');
-  };
+	var closeToc = function () {
+		$(".tocify-wrapper").removeClass('open');
+		$("#nav-button").removeClass('open');
+	};
 
-  var makeToc = function() {
-    global.toc = $("#toc").tocify({
-      selectors: 'h1, h2',
-      extendPage: false,
-      theme: 'none',
-      smoothScroll: false,
-      showEffectSpeed: 0,
-      hideEffectSpeed: 180,
-      ignoreSelector: '.toc-ignore',
-      highlightOffset: 60,
-      scrollTo: -1,
-      scrollHistory: true,
-      hashGenerator: function (text, element) {
-        return element.prop('id');
-      }
-    }).data('toc-tocify');
+	var makeToc = function () {
+		tocbot.init({
+			// Options
+			scrollSmooth: true,
 
-    $("#nav-button").click(function() {
-      $(".tocify-wrapper").toggleClass('open');
-      $("#nav-button").toggleClass('open');
-      return false;
-    });
+			// Neccesary to the operation.
+			tocSelector: '#toc',
+			contentSelector: '.content',
+			headingSelector: 'h1, h2',
+			ignoreSelector: '.toc-ignore',			
+			orderedList: true,
+			includeHtml: true,
+			linkClass: 'tocify-header',
+			listItemClass: 'tocify-item',
+			headingObjectCallback: function (obj, elem) {
+				const span = document.createElement('span');
+				if (elem.classList.contains('divider'))
+					span.classList.add('divider');
+				if (obj.nodeName === 'H1') {
+					span.innerText = elem.textContent;
+				} else {
+					const name = elem.dataset.name.toString();
+					const n = name.lastIndexOf('.');
+					if (n !== -1)
+						span.innerText = name.substring(n + 1);
+					else
+						span.innerText = name;
+					span.classList = elem.classList;
+				}
+				obj.childNodes = [span];
+				return obj;
+			},
 
-    $(".page-wrapper").click(closeToc);
-    $(".tocify-item").click(closeToc);
-    $('#toc-loading').remove();
-  };
+		});
+		// Fix dividers
+		document.querySelectorAll(".tocify-item .divider").forEach(function (elem) {
+			elem.parentElement.classList.add('divider');
+		})
 
-  // Hack to make already open sections to start opened,
-  // instead of displaying an ugly animation
-  function animate() {
-    setTimeout(function() {
-      toc.setOption('showEffectSpeed', 180);
-    }, 50);
-  }
+	};
 
-  $(function() {
-    makeToc();
-    animate();
-    setupLanguages($('body').data('languages'));
-    $('.content').imagesLoaded( function() {
-      global.toc.calculateHeights();
-    });
-  });
+	$(function () {
+		console.time('makeToc');
+		makeToc();
+		console.timeEnd('makeToc');
+		setupLanguages($('body').data('languages'));
+	});
 })(window);
 

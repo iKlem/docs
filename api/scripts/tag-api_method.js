@@ -1,5 +1,7 @@
 var util = require('hexo-util');
 
+var counter=0;
+
 hexo.extend.tag.register('api_method', function(args) {
   if(args[2] === undefined) {
     args[2] = args[1];
@@ -25,7 +27,7 @@ hexo.extend.tag.register('api_method', function(args) {
     opts = JSON.parse(args[3]);
   }
 
-  var result = `<h2 id="${id}" class="api-property ${args[0] == 'constructor' ? '' : 'api-property--method'} ${inherited ? 'api-property--inherited' : ''} ${opts.deprecated ? 'api-property--deprecated' : ''}">${inherited}<span class="api-property__name">${args[0]}</span><span class="api-property__args">${signatures}</span>
+  var result = `<h2 id="${id}_${counter++}" data-id="${id}" data-name="${args[0]}" class="api-property ${args[0] == 'constructor' ? '' : 'api-property--method'} ${inherited ? 'api-property--inherited' : ''} ${opts.deprecated ? 'api-property--deprecated' : ''}">${inherited}<span class="api-property__name">${args[0]}</span><span class="api-property__args">${signatures}</span>
         <div class="api-property__cpu api-property__cpu--${args[2]}" title="${cpuDescription[args[2]]}"></div>
         </h2>`;
   if(opts.deprecated) {

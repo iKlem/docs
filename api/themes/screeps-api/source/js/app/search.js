@@ -33,7 +33,7 @@
     content = $('.content');
     searchResults = $('.search-results');
 
-    $('#input-search').on('keyup', search);
+    $('#input-search').on('keyup', $.debounce(250, search));
   }
 
   function search(event) {

@@ -3,7 +3,7 @@
 The main global game object containing all the game play information.
 
 
-{% api_property Game.constructionSites 'object&lt;string, <a href="#ConstructionSite">ConstructionSite</a>&gt;' %}
+{% api_property constructionSites 'object&lt;string, <a href="#ConstructionSite">ConstructionSite</a>&gt;' %}
 
 
 
@@ -11,7 +11,7 @@ A hash containing all your construction sites with their id as hash keys.
 
 
 
-{% api_property Game.cpu 'object' %}
+{% api_property cpu 'object' %}
 
 
 
@@ -33,7 +33,7 @@ method to re-assign them.
 {% endapi_method_params %}
 
 
-{% api_property Game.creeps 'object&lt;string, <a href="#Creep">Creep</a>&gt;' %}
+{% api_property creeps 'object&lt;string, <a href="#Creep">Creep</a>&gt;' %}
 
 ```javascript
 for(const i in Game.creeps) {
@@ -45,7 +45,7 @@ A hash containing all your creeps with creep names as hash keys.
 
 
 
-{% api_property Game.flags 'object&lt;string, <a href="#Flag">Flag</a>&gt;' %}
+{% api_property flags 'object&lt;string, <a href="#Flag">Flag</a>&gt;' %}
 
 ```javascript
 creep.moveTo(Game.flags.Flag1);
@@ -55,7 +55,7 @@ A hash containing all your flags with flag names as hash keys.
 
 
 
-{% api_property Game.gcl 'object' %}
+{% api_property gcl 'object' %}
 
 
 
@@ -72,7 +72,7 @@ progressTotal : number
 The progress required to reach the next level.
 {% endapi_method_params %}
 
-{% api_property Game.gpl 'object' %}
+{% api_property gpl 'object' %}
 
 Your Global Power Level, an object with the following properties :
 
@@ -89,7 +89,7 @@ The progress required to reach the next level.
 
 
 
-{% api_property Game.map object %}
+{% api_property map object %}
 
 
 
@@ -97,14 +97,14 @@ A global object representing world map. See the [documentation](#Game-map) below
 
 
 
-{% api_property Game.market object %}
+{% api_property market object %}
 
 
 
 A global object representing the in-game market. See the [documentation](#Game-market) below.
 
 
-{% api_property Game.powerCreeps 'object&lt;string, <a href="#PowerCreep">PowerCreep</a>&gt;' %}
+{% api_property powerCreeps 'object&lt;string, <a href="#PowerCreep">PowerCreep</a>&gt;' %}
 
 ```javascript
 Game.powerCreeps['PC1'].moveTo(flag);
@@ -115,7 +115,7 @@ not spawned in the world can be accessed here.
 
 
 
-{% api_property Game.resources 'object' %}
+{% api_property resources 'object' %}
 
 
 
@@ -123,13 +123,13 @@ An object with your global resources that are bound to the account, like subscri
 
 
 
-{% api_property Game.rooms 'object&lt;string, <a href="#Room">Room</a>&gt;' %}
+{% api_property rooms 'object&lt;string, <a href="#Room">Room</a>&gt;' %}
 
 
 
 A hash containing all the rooms available to you with room names as hash keys. A room is visible if you have a creep or an owned structure in it.
 
-{% api_property Game.shard 'object' %}
+{% api_property shard 'object' %}
 
 An object describing the world shard where your script is currently being executed in.
 
@@ -144,7 +144,7 @@ ptr : boolean
 Whether this shard belongs to the [PTR](/ptr.html).
 {% endapi_method_params %}
 
-{% api_property Game.spawns 'object&lt;string, <a href="#StructureSpawn">StructureSpawn</a>&gt;' %}
+{% api_property spawns 'object&lt;string, <a href="#StructureSpawn">StructureSpawn</a>&gt;' %}
 
 ```javascript
 for(const i in Game.spawns) {
@@ -156,7 +156,7 @@ A hash containing all your spawns with spawn names as hash keys.
 
 
 
-{% api_property Game.structures 'object&lt;string, <a href="#Structure">Structure</a>&gt;' %}
+{% api_property structures 'object&lt;string, <a href="#Structure">Structure</a>&gt;' %}
 
 
 
@@ -164,7 +164,7 @@ A hash containing all your structures with structure id as hash keys.
 
 
 
-{% api_property Game.time 'number' %}
+{% api_property time 'number' %}
 
 ```javascript
 console.log(Game.time);
@@ -172,12 +172,61 @@ console.log(Game.time);
 
 System game tick counter. It is automatically incremented on every tick. <a href="/game-loop.html">Learn more</a>
 
-# Game.cpu
-
-{% api_method Game.cpu.getHeapStatistics '' 1 %}
+{% api_method getObjectById 'id' 1 %}
 
 ```javascript
-let heap = Game.cpu.getHeapStatistics();
+creep.memory.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
+const source = Game.getObjectById(creep.memory.sourceId);
+```
+
+Get an object with the specified unique ID. It may be a game object of any type. Only objects from the rooms which are visible to you can be accessed.
+
+{% api_method_params %}
+id : string
+The unique identificator.
+{% endapi_method_params %}
+
+
+### Return value
+
+Returns an object instance or null if it cannot be found.
+
+{% api_method notify 'message, [groupInterval]' A %}
+
+```javascript
+if(creep.hits < creep.memory.lastHits) {
+    Game.notify('Creep '+creep+' has been attacked at '+creep.pos+'!');
+}
+creep.memory.lastHits = creep.hits;
+```
+
+```javascript
+if(Game.spawns['Spawn1'].energy == 0) {
+    Game.notify(
+        'Spawn1 is out of energy',
+        180  // group these notifications for 3 hours
+    );
+}
+
+```
+
+Send a custom message at your profile email. This way, you can set up notifications to yourself on any occasion within the game. You can schedule up to 20 notifications during one game tick. Not available in the Simulation Room.
+
+{% api_method_params %}
+message : string
+Custom text which will be sent in the message. Maximum length is 1000 characters.
+===
+groupInterval : number
+If set to 0 (default), the notification will be scheduled immediately. Otherwise, it will be grouped with other notifications and mailed out later using the specified time in minutes.
+{% endapi_method_params %}
+
+
+# Game.cpu
+
+{% api_method cpu.getHeapStatistics '' 1 %}
+
+```javascript
+let heap = cpu.getHeapStatistics();
 console.log(`Used ${heap.total_heap_size} / ${heap.heap_size_limit}`);
 ```
 
@@ -207,7 +256,7 @@ Returns an objects with heap statistics in the following format:
 ```
 
 
-{% api_method Game.cpu.getUsed '' 1 %}
+{% api_method cpu.getUsed '' 1 %}
 
 ```javascript
 if(Game.cpu.getUsed() > Game.cpu.tickLimit / 2) {
@@ -236,7 +285,7 @@ Get amount of CPU time used from the beginning of the current game tick. Alway
 Returns currently used CPU time as a float number.
 
 
-{% api_method Game.cpu.halt '' 1 %}
+{% api_method cpu.halt '' 1 %}
 
 ```javascript
 Game.cpu.halt();
@@ -246,7 +295,7 @@ Game.cpu.halt();
 
 Reset your runtime environment and wipe all data in heap memory.
 
-{% api_method Game.cpu.setShardLimits 'limits' 1 %}
+{% api_method cpu.setShardLimits 'limits' 1 %}
 
 ```javascript
 Game.cpu.setShardLimits({shard0: 20, shard1: 10});
@@ -270,51 +319,3 @@ ERR_BUSY | 12-hours cooldown period is not over yet.
 ERR_INVALID_ARGS | The argument is not a valid shard limits object.
 {% endapi_return_codes %}
 
-
-{% api_method Game.getObjectById 'id' 1 %}
-
-```javascript
-creep.memory.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
-const source = Game.getObjectById(creep.memory.sourceId);
-```
-
-Get an object with the specified unique ID. It may be a game object of any type. Only objects from the rooms which are visible to you can be accessed.
-
-{% api_method_params %}
-id : string
-The unique identificator.
-{% endapi_method_params %}
-
-
-### Return value
-
-Returns an object instance or null if it cannot be found.
-
-{% api_method Game.notify 'message, [groupInterval]' A %}
-
-```javascript
-if(creep.hits < creep.memory.lastHits) {
-    Game.notify('Creep '+creep+' has been attacked at '+creep.pos+'!');
-}
-creep.memory.lastHits = creep.hits;
-```
-
-```javascript
-if(Game.spawns['Spawn1'].energy == 0) {
-    Game.notify(
-        'Spawn1 is out of energy',
-        180  // group these notifications for 3 hours
-    );
-}
-
-```
-
-Send a custom message at your profile email. This way, you can set up notifications to yourself on any occasion within the game. You can schedule up to 20 notifications during one game tick. Not available in the Simulation Room.
-
-{% api_method_params %}
-message : string
-Custom text which will be sent in the message. Maximum length is 1000 characters.
-===
-groupInterval : number
-If set to 0 (default), the notification will be scheduled immediately. Otherwise, it will be grouped with other notifications and mailed out later using the specified time in minutes.
-{% endapi_method_params %}

@@ -1,13 +1,22 @@
 var util = require('hexo-util');
 
-var counter=0;
-
 hexo.extend.tag.register('api_method', function(args) {
   if(args[2] === undefined) {
     args[2] = args[1];
     args[1] = '';
   }
-  var id = util.slugize(args[0].trim());
+  var name = args[0];
+  const mr = this.raw.match(/^\# (\S+)/);
+  if(mr) {
+    name = mr[1] ? `${mr[1]}.${name}` : name;
+  } else {
+    if(this.parentTitle) {
+      name = `${this.parentTitle}.${name}`;
+    }
+  }
+
+  var id = util.slugize(name, {separator: '.'});
+
   var signatures = args[1].split('|').map(i => `(${i})`).join('<br>');
   var inherited = '';
   var cpuDescription = {
@@ -27,7 +36,7 @@ hexo.extend.tag.register('api_method', function(args) {
     opts = JSON.parse(args[3]);
   }
 
-  var result = `<h2 id="${id}_${counter++}" data-id="${id}" data-name="${args[0]}" class="api-property ${args[0] == 'constructor' ? '' : 'api-property--method'} ${inherited ? 'api-property--inherited' : ''} ${opts.deprecated ? 'api-property--deprecated' : ''}">${inherited}<span class="api-property__name">${args[0]}</span><span class="api-property__args">${signatures}</span>
+  var result = `<h2 id="${id}" data-id="${id}" data-name="${args[0]}" class="api-property ${args[0] == 'constructor' ? '' : 'api-property--method'} ${inherited ? 'api-property--inherited' : ''} ${opts.deprecated ? 'api-property--deprecated' : ''}">${inherited}<span class="api-property__name">${args[0]}</span><span class="api-property__args">${signatures}</span>
         <div class="api-property__cpu api-property__cpu--${args[2]}" title="${cpuDescription[args[2]]}"></div>
         </h2>`;
   if(opts.deprecated) {

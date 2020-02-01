@@ -25,5 +25,5 @@ Ensuite vous pouvez lancer le serveur de développement :
 ```
 npm run server
 ```
-Dès lors que vos modifications sont corrects, faite un "pull request".  
+Dès lors que vos modifications sont corrects, faite un "pull request" vers ce dépôt : "ScreepsFrance/docs -> master_france".  
 Une validation sera faite par l'équipe de traduction et sera intégrée dans la branche "master_france".

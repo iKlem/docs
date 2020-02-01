@@ -1,30 +1,29 @@
-This project contains the sources of the [documentation web site](http://docs.screeps.com) for Screeps online game.
+## Informations à propos du projet
+Ce projet contiens la traduction française de la documentation officiel de [Screeps](http://docs.screeps.com/)
 
-You need to have Node.js in order to build this project.
-
-1. Install all npm dependendcies:
-
+## Comment contribuer
+Pour contribuer vous devez tout d'abord faire un "fork" de ce projet.  
+Ensuite créez vous une branche indiquant le changement ou traduction à faire.  
+Ensuite vous devrez installer les dépendances comme suis :
 ```
 npm install
 cd api
 npm install
 cd ..
 ```
-    
-2. Generate static site:
 
+Faites vos changements dans votre branche, vous pouvez tester vos changements en générant le site avec les commandes suivantes :
 ```
 npm run generate
 cd api
 npm run generate
 cd ..
 ```
+*Note* : Vous pouvez utiliser `generate-watch` au lieu de `generate` pour visualiser vos modifications en temps-réel.
 
-You can use `generate-watch` instead of `generate` to sync changes in real time.
-
-3. Run development server:
-
+Ensuite vous pouvez lancer le serveur de développement :
 ```
 npm run server
 ```
-
+Dès lors que vos modifications sont corrects, faite un "pull request".  
+Une validation sera faite par l'équipe de traduction et sera intégrée dans la branche "master_france".

@@ -3,16 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Screeps Documentation
+title: Documentation Screeps
 subtitle:
-description:
-author: Screeps
-language: en
-timezone:
+description: Traduction Francaise de la documentation officielle
+author: Screeps France
+language: fr
+timezone: Europe/Paris
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://docs.screeps.com/
+# TODO: uploader le site et donner son adresse adequate des que possible
+url: localhost
 root: /
 permalink: :title/
 
@@ -41,7 +42,7 @@ highlight:
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: MMM DD, YYYY
+date_format: DD/MM/YYYY
 time_format: HH:mm:ss
 
 # Pagination
@@ -72,4 +73,4 @@ marked:
   breaks: false
   smartypants: false
 
-github: screeps/docs
+github: ScreepsFrance/docs

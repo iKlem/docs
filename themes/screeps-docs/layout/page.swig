@@ -22,7 +22,7 @@
             </div>
           </div>
           <aside id="article-toc" role="navigation">
-            {% if page.title == 'Overview' %}
+            {% if page.title == 'A propos' %}
             <div id="twitter-feed">
               <a class="twitter-timeline" data-width="220" data-height="600" href="https://twitter.com/ScreepsGame">Tweets by ScreepsGame</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>

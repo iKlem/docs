@@ -1,30 +1,28 @@
-This project contains the sources of the [documentation web site](http://docs.screeps.com) for Screeps online game.
+## Informations à propos du projet
+Ce projet contiens la traduction française de la documentation officiel de [Screeps](http://docs.screeps.com/)
 
-You need to have Node.js in order to build this project.
+## Comment contribuer
+Voir le fichier [Contribuer.md](Contribuer.md) pour plus de détails
 
-1. Install all npm dependendcies:
-
+## Comment utiliser le projet
+Dès que vous avez cloné votre fork sur votre machine, vous devez installer les dépendances :
 ```
 npm install
 cd api
 npm install
 cd ..
 ```
-    
-2. Generate static site:
 
+Pour mettre à jour vos modification :
 ```
 npm run generate
 cd api
 npm run generate
 cd ..
 ```
+*Note* : Vous pouvez utiliser `generate-watch` au lieu de `generate` pour mettre à jour vos modifications en temps-réel.
 
-You can use `generate-watch` instead of `generate` to sync changes in real time.
-
-3. Run development server:
-
+Ensuite vous pouvez lancer le serveur de développement :
 ```
 npm run server
 ```
-

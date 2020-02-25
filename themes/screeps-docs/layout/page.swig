@@ -7,7 +7,7 @@
             <div class="inner">
               <header class="article-header">
                 <h1 class="article-title" itemprop="name" id="top">{{ page.title }}</h1>
-                <a href="{{ raw_link(page.source) }}" class="article-edit-link" title="{{ __('page.improve') }}"><i class="fa fa-pencil"></i></a>
+                <!-- <a href="{{ raw_link(page.source) }}" class="article-edit-link" title="{{ __('page.improve') }}"><i class="fa fa-pencil"></i></a> -->
               </header>
               <div class="article-content" itemprop="articleBody">
                 {% if page.contributed %}
@@ -22,7 +22,7 @@
             </div>
           </div>
           <aside id="article-toc" role="navigation">
-            {% if page.title == 'Overview' %}
+            {% if page.title == 'A propos' %}
             <div id="twitter-feed">
               <a class="twitter-timeline" data-width="220" data-height="600" href="https://twitter.com/ScreepsGame">Tweets by ScreepsGame</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>

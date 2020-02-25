@@ -94,7 +94,9 @@ hexo.extend.helper.register('url_for_lang', function(path){
 });
 
 hexo.extend.helper.register('raw_link', function(path){
-  return 'https://github.com/screeps/docs/edit/master/source/' + path;
+  // return 'https://github.com/screeps/docs/edit/master/source/' + path;
+  // NOTE (iKlem): je retire cette partie temporairement car cela redirige sur le github officiel
+  return '';
 });
 
 hexo.extend.helper.register('page_anchor', function(str){

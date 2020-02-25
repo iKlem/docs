@@ -13,8 +13,7 @@ timezone: Europe/Paris
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-# TODO: uploader le site et donner son adresse adequate des que possible
-url: localhost
+url: http://docs.screeps.iklem.fr/
 root: /
 permalink: :title/
 

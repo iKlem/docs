@@ -6,11 +6,11 @@ Bievenue sur la documentation Française de Screeps. Familiarisez-vous avec le j
 Apprendre les bases du jeu dans le tutoriel interactif.
 {% endindex_block %}
 
-{% index_block "API Reference" "/api" %}
+{% index_block "API" "/api" %}
 Référence de tout les objets en jeu, méthodes et prototypes.
 {% endindex_block %}
 
-{% index_block "Contributed articles" "/contributed/rules.html" %}
+{% index_block "Articles contribués" "/contributed/rules.html" %}
 Lire des articles écrits par la communauté ou contribuez.
 {% endindex_block %}
 

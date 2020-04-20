@@ -1,38 +1,42 @@
 title: Introduction
 ---
 
-## What kind of game is Screeps
+## Quel genre de jeu est Screeps
 
-Screeps is a massive multiplayer online real-time strategy game. Each player can create their own colony in a **single persistent world** shared by all the players. Such a colony can mine **resources**, build **units**, conquer **territory**. As you conquer more territory, your influence in the game world grows, as well as your abilities to expand your footprint. However, it requires a lot of effort on your part, since multiple players may aim at the same territory.
+Screeps est un jeu massivement multijoueur en ligne de stratégie en temps réel. Chaque joueur peuvent créer leurs colonies dans un **monde persistant** partagé par tous les joueurs. Une colonie peut récolter des **ressources**, créer des **unités**, conquérir des **territoires**. Au fur et à mesure que vous conquérez plus de territoire, votre influence dans le monde augmente, ainsi que votre capacité à étendre votre empreinte. Cependant, cela vous demandera de faire des efforts de votre part, car plusieurs joueurs peuvent viser le même territoire.
 
-Screeps is developed for people with **programming skills**. Unlike some other RTS games, your units in Screeps can react to events without your participation – provided that you have programmed them properly. And, unlike other MMO, you do not have to play Screeps constantly to play well. It is quite enough just to check once in a while to see if everything goes well.
+Screeps est développé pour les personnes avec **des compétences dans la programmation**. Contrairement à d'autres jeux de stratégies en temps réel, vos unités dans le jeu peuvent réagir à des évenements sans votre participation - à condition que vous les ayez correctement programmés. Et contraitement à d'autres jeux massivement multijoueur, vous n'avez pas à jouer constamment pour bien jouer. Il suffit de bien vérifier de temps en temps pour voir si tout se passe correctement.
 
-## Game world
+## Le monde
 
-The game world consists of interconnected **rooms**. A room is a closed space 50x50 cells in size. It may have from 1 to 4 exits to other rooms. The world is separated into **shards** which are connected by intershard portals. You can consider shards a Z-axis of the world.
+Le monde se compose de **salles** ("rooms") interconnectées. Une salle est un espace clos de 50 par 50 cellules ou cases (exemple: imaginez une image de 50 par 50 pixels). Elle peux avoir entre 1 à 4 sortie vers d'autres salles. Le monde est séparé en **regions**, interconnectés avec des portails inter-régions. Vous pouvez considérer une région comme un étage du monde.
 
 ![](img/shards.png)
 
-Each room landscape is unique. The view of each room is generated procedurally and consists of three types of surface:
+Le paysage d'une salle est unique. La vue de chaque salle est générée procéduralement et consiste en trois type de surface:
 
-*   **Plain land** – simple ground with a movement cost of 2.
-*   **Swamps** increase a movement cost to 10.
-*   **Walls** block movement of all creeps. 
+*   **Le terrain plat** – sol simple avec un coût de mouvement de 2 (note).
+*   **Les marécages** augmentent le coût de mouvement de 10.
+*   **Les murs naturels** bloquent tout mouvement des unités.
 
-You can customize the room landscape with the help of the following facilities:
+Vous pouvez modifier le paysage d'une salle avec l'aide des structures suivantes:
 
-*   **Roads** decrease a movement cost to 1. Roads deteriorate due to movement and require repair.
-*   **Constructed walls** can be created by players. Unlike natural walls, they may be attacked and destroyed by creeps.
-*   **Ramparts** are your defenses. Only your creeps may move inside your ramparts. Besides, a creep inside a rampart cell cannot be attacked until the rampart is destroyed (though it can attack others). Ramparts deteriorate with each game cycle and require repair.
+*   **Les routes** diminue le coût des mouvement de 1. Elles se déteriorent avec les déplacement et/ou avec le temps et nécessitent des réparations.
+*   **Les murs construits** peuvent être construits par les joueurs. Contrairement au murs naturels, ils peuvent être attaqués et detruits par des unités.
+*   **Les ramparts** sont vos défenses. Seules vos unités peuvent se déplacer à l'intérieur de vos ramparts. De plus, une unité dans un rampart ne peux pas être attaquée tant que le rampart n'est pas detruit. Les ramparts se déteriorent à chaque cycle (tick) de jeu et nécessitent des réparations.
 
-In the beginning of the game, you are free to choose the place for your new colony in one of the free rooms inside the zone of the game world available for settlement. After your first spawn is set up, your room will be in **safe mode**. Use this time to create good defenses, or any player will be able to destroy your colony!
+Au début de votre experience de jeu, vous êtes libre de choisir l'emplacement de votre nouvelle colonie dans une salle libre dans le monde. Une fois votre première structure installée, votre salle sera en mode **sans danger** ("safe mode"). Utilisez ce temps pour vous créer de bonne défenses car n'importe quel joueur sera capable de détruire votre colonie !
 
-## Your colony
+## Votre colonie
 
 **![](img/colony-center.png)**
 
-**Energy sources** are the main game resource. They can be harvested by worker creeps. The amount of energy in a source is limited, but resumes once in 300 game ticks.
+**Les sources d'énergie** sont la principale ressource du jeu. Ces ressources peuvent être récoltées par vos unités. La quantitée d'énergie dans une source est limitée mais reprend sa quantité maximum une fois tout les 300 cycles (ticks) de jeu
 
-**Spawns** are your colony centers. They can accumulate mined energy and use it to create your units. There may be no more than 3 spawns in a room. Hence, by building 3 spawns in a room you actually conquer it. You can have multiple spawns totally in all your rooms though.
+**Les point d'apparitions ("spawns")** sont les centres de votre colonie. Ils peuvent accumuler de l'énergie venant des sources et peuvent l'utiliser pour créer vos unités. Il ne peut y avoir plus de 3 "spawn" dans une salle.
 
-A spawn itself can build only basic units. In order to build more complex ones, you have to construct one or more spawn **extensions**. Read more about that in the next article.
+Un "spawn" à lui seul peux créer des unités basiques. Pour créer des unités plus complexes vous devez construire une ou plusieurs **extensions**. Plus de détails dans l'article suivant.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

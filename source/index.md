@@ -22,13 +22,13 @@ Rejoindre la communauté sur Slack.
 Rejoindre la communauté Française sur Steam.
 {% endindex_block %}
 
-{% index_block "Discord" "https://discord.gg/xSsqRf4" %}
+{% index_block "Discord" "https://discord.gg/mpymHrQ" %}
 Rejoindre la communauté Française sur Discord.
 {% endindex_block %}
 
 ## Autres ressources
 
-* Vous avez des questions sur le jeu ? Vous pouvez les poser sur le [Groupe Steam](https://steamcommunity.com/groups/screepsfr) de la communauté Française et/ou le [Discord](https://discord.gg/xSsqRf4)
+* Vous avez des questions sur le jeu ? Vous pouvez les poser sur le [Groupe Steam](https://steamcommunity.com/groups/screepsfr) de la communauté Française et/ou le [Discord](https://discord.gg/mpymHrQ)
 * Vous pouvez trouver des exemples fonctionnel de scénarios créés par les autres joueurs sur [GitHub](https://github.com/search?o=desc&p=1&q=screeps&s=updated&type=Repositories).
 * Vous avez vu des coquilles dans la traduction de la documentation ? N'hésitez pas à le remonter dans une issue sur le [github du projet](https://github.com/ScreepsFrance/docs/issues)
 

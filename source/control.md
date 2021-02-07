@@ -1,96 +1,101 @@
-title: Control
+title: Le Contrôle
 ---
 
-## Global Control Level
+## "Global Control Level"
 
-To expand your empire in the game world, you need to develop your main game indicator – your **Global Control Level** (GCL). It affects two important factors: 
+Pour étendre votre empire dans le jeu, vous devez développer votre **Niveau de Contrôle Global** (*Global Control Level* ou *GCL*). Cela affecte deux facteurs importants :
 
-*   **Your CPU Limit.** On the official server you begin the game with a 20 CPU limit which allows you to control just a small number of creeps. However, if you're a [subscribed](/subscription.html) player you gain 10 CPU for each GCL level until your limit reaches 300 CPU. Then it stops increasing.
-*   **The amount of rooms you can control.** For example, to control 3 rooms, you need to have GCL 3.
+*   **Votre limite de CPU.** Sur le serveur officiel vous commencez avec une limite de 20 CPU vous octroyant un contrôle d'une petite quantité d'unités. Cependant, si vous êtes un joueur [abonné](/subscription.html) vous gagnez 10 CPU pour chaque niveau de GCL jusqu'à une limite de 300 CPU.
+*   **La quantité de salles que vous pouvez contrôler.** Par exemple, pour contrôler 3 salles, vous devez avoir votre GCL au niveau 3.
 
-Your current Global Control Level is displayed at your [overview page](https://screeps.com/a/#!/overview).
+Votre niveau actuel est affiché sur votre [page d'aperçu](https://screeps.com/a/#!/overview).
 
 ![](img/gcl-cpu.png)
 
-## Room Controller Level
+## "Room Controller Level"
 
-In order to build any facilities in a room, you need to control it. In the majority of rooms (but not all), there are special objects called **Room Controllers**. In your first room, the Controller is owned by you by default. Any neutral Controller can be [claimed](/api/#Creep.claimController) by your creeps with the `CLAIM` body part, which instantly puts the room under your control.
+Pour construire de nouvelles structures dans une salle, vous devez en avoir le contrôle. Dans la majorité des salles (mais pas toutes), il y a des structures spéciales appelées **Controlleurs de salles** (*Room Controllers*). Dans votre première salle, le Controlleur est par défaut votre propriété. Tout Controlleur neutre peuvent être [revendiqué](/api/#Creep.claimController) par vos unités avec une partie de corps `CLAIM`, qui donne instantanément la salle sous votre contrôle.
+
 
 ![](img/c1.png)
 
-A newly-seized Controller allows you to build one spawn in the room. In order for you to build extra spawns, roads, and extensions, you have to upgrade the Room Controller Level (RCL) by pumping energy into the controller using [`Creep.upgradeController`](/api/#Creep.upgradeController) method.
+Un Controlleur nouvellement acquis vous permet donc de construire 1 Spawn dans la salle. Pour construire d'autres Spawn, routes et extensions, vous devez augmenter le **Room Controller Level** (RCL) en envoyant de l'énergie dans le controlleur en utilisant la méthode [`Creep.upgradeController`](/api/#Creep.upgradeController).
 
 ![](img/c2.png)
 
-## Available structures per RCL
+## Liste des structures disponibles par RCL
 
 <table>
 <tbody>
 <tr>
 <th style="width: 10%;">RCL</th>
-<th style="width: 15%;">Energy to upgrade</th>
+<th style="width: 20%;">Energie pour amélioration</th>
 <th>Structures</th>
 </tr>
 <tr>
 <td>0</td>
 <td>—</td>
-<td>Roads, 5 Containers</td>
+<td>Routes, 5 Conteneurs</td>
 </tr>
 <tr>
 <td>1</td>
 <td>200</td>
-<td>Roads, 5 Containers, 1 Spawn</td>
+<td>Routes, 5 Conteneurs, 1 Spawn</td>
 </tr>
 <tr>
 <td>2</td>
 <td>45,000</td>
-<td>Roads, 5 Containers, 1 Spawn, 5 Extensions (50 capacity), Ramparts (300K max hits), Walls</td>
+<td>Routes, 5 Conteneurs, 1 Spawn, 5 Extensions (50 capacité), Ramparts (300K max hits), Murs</td>
 </tr>
 <tr>
 <td>3</td>
 <td>135,000</td>
-<td>Roads, 5 Containers, 1 Spawn, 10 Extensions (50 capacity), Ramparts (1M max hits), Walls, 1 Tower</td>
+<td>Routes, 5 Conteneurs, 1 Spawn, 10 Extensions (50 capacité), Ramparts (1M max hits), Murs, 1 Tour</td>
 </tr>
 <tr>
 <td>4</td>
 <td>405,000</td>
-<td>Roads, 5 Containers, 1 Spawn, 20 Extensions (50 capacity), Ramparts (3M max hits), Walls, 1 Tower, Storage</td>
+<td>Routes, 5 Conteneurs, 1 Spawn, 20 Extensions (50 capacité), Ramparts (3M max hits), Murs, 1 Tour, Stockage</td>
 </tr>
 <tr>
 <td>5</td>
 <td>1,215,000</td>
-<td>Roads, 5 Containers, 1 Spawn, 30 Extensions (50 capacity), Ramparts (10M max hits), Walls, 2 Towers, Storage, 2 Links</td>
+<td>Routes, 5 Conteneurs, 1 Spawn, 30 Extensions (50 capacité), Ramparts (10M max hits), Murs, 2 Tours, Stockage, 2 Liens</td>
 </tr>
 <tr>
 <td>6</td>
 <td>3,645,000</td>
-<td>Roads, 5 Containers, 1 Spawn, 40 Extensions (50 capacity), Ramparts (30M max hits), Walls, 2 Towers, Storage, 3 Links, Extractor, 3 Labs, Terminal</td>
+<td>Routes, 5 Conteneurs, 1 Spawn, 40 Extensions (50 capacité), Ramparts (30M max hits), Murs, 2 Tours, Stockage, 3 Liens, Extracteur, 3 Labos, Terminal</td>
 </tr>
 <tr>
 <td>7</td>
 <td>10,935,000</td>
-<td>Roads, 5 Containers, 2 Spawns, 50 Extensions (100 capacity), Ramparts (100M max hits), Walls, 3 Towers, Storage, 4 Links, Extractor, 6 Labs, Terminal</td>
+<td>Routes, 5 Conteneurs, 2 Spawns, 50 Extensions (100 capacité), Ramparts (100M max hits), Murs, 3 Tours, Stockage, 4 Liens, Extracteur, 6 Labos, Terminal</td>
 </tr>
 <tr>
 <td>8</td>
 <td>—</td>
-<td>Roads, 5 Containers, 3 Spawns, 60 Extensions (200 capacity), Ramparts (300M max hits), Walls, 6 Towers, Storage, 6 Links, Extractor, 10 Labs, Terminal, Observer, Power Spawn</td>
+<td>Routes, 5 Conteneurs, 3 Spawns, 60 Extensions (200 capacité), Ramparts (300M max hits), Murs, 6 Tours, Stockage, 6 Liens, Extracteur, 10 Labos, Terminal, Observeur, "Power Spawn"</td>
 </tr>
 </tbody>
 </table>
 
-## Attacking controllers
+## Attaquer des controlleurs
 
-A Controller cannot be damaged or destroyed. However, a Controller not affected by an [`upgradeController`](/api/#Creep.upgradeController) action will run a downgrade timer losing 20,000 game ticks at RCL 1, or 5,000 game ticks at RCL 2 to 150,000 game ticks at RCL 8. All timers are listed in the [`StructureController`](/api/#StructureController) prototype. As soon as its level reaches 0, a Controller becomes neutral, and another player can reclaim it. Make sure that you upgrade your Controllers from time to time to keep their levels!
+Un Controlleur ne peux être endommagé ou détruit. Cependant, un Controlleur non affecté par l'action [`upgradeController`](/api/#Creep.upgradeController) va faire apparaitre un **compteur de rétrogradation** faisant perdre 1 niveau de RCL dès que ce compteur atteint 0. Les compteurs sont listés dans le prototype de [`StructureController`](/api/#StructureController). Dès que le niveau atteint 0, un Controlleur deviens neutre et peut être revendiqué par un autre joueur. Vous devez donc être sûr de mettre à jour vos Controlleurs pour garder vos niveaux de RCL
 
-You can attack another player's controller downgrade timer by applying [`attackController`](/api/#Creep.attackController) on it.
+Vous pouvez attaquer le minuteur de rétrogradation d'un Controlleur d'un autre joueur en utilisant la méthode [`attackController`](/api/#Creep.attackController) sur le Controlleur.
 
 ![](img/controllerDowngrade.png)
 
-## Raising GCL
+## Augmenter le GCL
 
-Upgrading GCL requires pumping energy into your Controllers – GCL grows in parallel with the level of your Controllers. Any contribution to any of your Controllers affects your GCL, even if the Controller is fully upgraded to the level 8.
+Augmenter le niveau de GCL est faisable en envoyant de l'énergie dans vos Controlleurs - le GCL augmente en paralèlle avec le niveau de vos Controlleurs. Mettre à jour n'importe quel de vos Controlleurs affecte votre niveau de GCL, même si le Controlleur est au niveau maximum (niveau 8).
 
-Having upgraded your GCL once, you will never lose it. Even after complete fail in the game and loss of all your rooms, your GCL is stored in your account forever. It allows you to respawn at a new place and quickly regain your former glory.
+Après avoir augmenté votre niveau de GCL, vous ne le perdrez pas. Même si vous perdez toutes vos salles, votre niveau de GCL est lié à votre compte pour toujours.
 
-If some day in the future you plan to claim a room that requires a higher GCL than you have, you can still [reserve](/api/#Creep.reserveController) its Controller. Also, reserving a Controller in a neutral room restores energy sources to their full capacity.
+Si dans le futur vous souhaitez acquérir une salle qui vous demande un niveau de GCL plus haut que le votre, vous pouvez toujours [réserver](/api/#Creep.reserveController) son Controlleur. Réserver un Controlleur dans une salle neutre permet de remettre les capacités des sources d'énergie au maximum.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

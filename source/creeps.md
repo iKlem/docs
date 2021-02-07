@@ -9,7 +9,7 @@ Cependant, rappelez-vous qu'une unité a un cycle de vie de 1500 cycles (le temp
 
 Un "spawn" standard (la structure) ne peux créer que des unités standard avec un coût total de **300 points de ressource d'énergie**. Pour pouvoir créer des unités plus chers vous aurez besoin d'une **extension de "spawn"** dans la salle. Chaque extension peut contenir jusqu'à **50 points de ressource d'énergie** pouvant être utilisées pour la création d'une unité. L'emplacement exact des extensions dans une salle n'est pas importante mais doivent être dans la même salle que le "spawn" (une extension peut être utilisée par plusieur spawns). L'énergie nécessaire devrait se trouver dans le spawn et les extensions pour la création d'une unité.
 
-Le nombre d'extensions disponibles construisables dépend du niveau du Contrôleur dans la salle. Plus de détails dans "[Le Controle](/control.html)"
+Le nombre d'extensions disponibles construisables dépend du niveau du Contrôleur dans la salle. Plus de détails dans "[Le Contrôle](/control.html)"
 
 ## Les capacités d'une unité
 

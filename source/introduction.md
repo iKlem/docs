@@ -9,7 +9,7 @@ Screeps est développé pour les personnes avec **des compétences dans la progr
 
 ## Le monde
 
-Le monde se compose de **salles** ("rooms") interconnectées. Une salle est un espace clos de 50 par 50 cellules ou cases (exemple: imaginez une image de 50 par 50 pixels). Elle peux avoir entre 1 à 4 sortie vers d'autres salles. Le monde est séparé en **regions**, interconnectés avec des portails inter-régions. Vous pouvez considérer une région comme un étage du monde.
+Le monde se compose de **salles** (*rooms*) interconnectées. Une salle est un espace clos de 50 par 50 cellules ou cases (exemple: imaginez une image de 50 par 50 pixels). Elle peux avoir entre 1 à 4 sortie vers d'autres salles. Le monde est séparé en **regions** (*shard*), interconnectés avec des portails inter-régions. Vous pouvez considérer une région comme un étage du monde.
 
 ![](img/shards.png)
 
@@ -33,7 +33,7 @@ Au début de votre experience de jeu, vous êtes libre de choisir l'emplacement 
 
 **Les sources d'énergie** sont la principale ressource du jeu. Ces ressources peuvent être récoltées par vos unités. La quantitée d'énergie dans une source est limitée mais reprend sa quantité maximum une fois tout les 300 cycles (ticks) de jeu
 
-**Les point d'apparitions ("spawns")** sont les centres de votre colonie. Ils peuvent accumuler de l'énergie venant des sources et peuvent l'utiliser pour créer vos unités. Il ne peut y avoir plus de 3 "spawn" dans une salle.
+**Les point d'apparitions (*spawn*)** sont les centres de votre colonie. Ils peuvent accumuler de l'énergie venant des sources et peuvent l'utiliser pour créer vos unités. Il ne peut y avoir plus de 3 "spawn" dans une salle.
 
 Un "spawn" à lui seul peux créer des unités basiques. Pour créer des unités plus complexes vous devez construire une ou plusieurs **extensions**. Plus de détails dans l'article suivant.
 

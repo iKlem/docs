@@ -1,57 +1,57 @@
-title: Defending your room
+title: Défendre votre salle
 ---
 
-The world of Screeps is not the safest place on earth. This article explains the means you have at your disposal to protect yourself from invasions.
+Le monde de Screeps n'est pas le plus sûr sur Terre. Cet article vous explique les éléments à votre disposition pour vous protéger des invasions.
 
-## Safe mode
+## Le mode "Protection" - _Safe mode_
 
-When you start out in the game, you have **Safe Mode** turned on in your room. It means that no other creep will be able to use any methods in this room that can affect your creeps of objects (but you’ll still be able to defend against strangers). See more about that in the description of [`StructureController`](/api/#StructureController)
+Quand vous commencer dans le jeu, le mode **"Protection"** sera activé dans votre salle. Ce mode permet de bloquer les méthodes utilisables par les autres joueurs qui peuvent affecter vos unités ou structures (vous serez toujours capable de vous défendre). Plus d'informations dans la description du [`StructureController`](/api/#StructureController).
 
 ![](img/safe_mode.png)
 
-Safe mode lasts for **20,000 game ticks** (approx. 20 hours depending on the tick duration). However, if the room controller has extra available activations, you can turn on safe mode again using the method [`StructureController.activateSafeMode`](/api/#StructureController.activateSafeMode):
+Le mode "Protection" reste actif pendant **20,000 ticks** (environ 20 heures selon la durée d'un tick). Cependant, si le Controlleur de la salle possède des activation en plus, vous pouvez à tout moment activer de nouveau le mode "Protection" en utilisant la méthode [`StructureController.activateSafeMode`](/api/#StructureController.activateSafeMode):
 
     Game.rooms.W1N1.controller.activateSafeMode()
 
-A controller obtains one activation with each new level. Later, you can add more activations to your controller with the help of the ghodium resource using the method [`Creep.generateSafeMode`](/api/#Creep.generateSafeMode).
+Un controlleur obtient 1 activation avec chaque nouveau niveau. Vous pouvez gagner plus d'activation pour votre controlleur avec l'ajout de ressources de **ghodium** en utilisant la méthode [`Creep.generateSafeMode`](/api/#Creep.generateSafeMode).
 
-Safe mode is a defense tactic of last resort, when everything else has failed. Besides, safe mode can be active only in one room per shard at the same time. For more robust defense you should use walls, ramparts, towers, and creep defenders.
+Le mode "Protection" est un élément de défense tactique de dernier recours quand vous ne pouvez plus rien faire. De plus, le mode "Protection" ne peux être activé seulement dans une seule salle par shard. Pour une meilleure défense vous devez utiliser les murs, ramparts, tours et des unités avec parties de corps prévu pour l'attaque/défense.
 
-## Passive defense: walls
+## Les défenses passives : les murs
 
-The most easy and trivial way to defend your room is to build the same **walls** that you may have noticed surrounding a novice zone during the initial grace period. There is a difference though: while the initial walls were right on doorways blocking outside creeps, your new walls may be built not closer than 2 squares to the room edges, and hostile creeps will still be able to enter the room and destroy your fortifications. This is why it's crucial not to just build, but also **fortify** your walls in such a way that it takes your opponents much time to destroy them.
+La manière la plus trivial pour défendre votre salle reste de construire les mêmes **murs** qui entoure votre salles lorsque vous êtes dans une zone "Novice" durant vos premières heures d'apparition. Cependant il y a une différence : les murs initiaux sont placés sur vos sorties bloquant les menaces exterieures de pénétrer, vos nouveaux murs ne pourront pas être construits dans un rayon de 2 cases par rapport au bord de votre salle, permettant aux menaces précédentes de pénétrer votre salle et détruire vos fortifications. Il est donc curcial de ne pas juste construire mais aussi de **fortifier** vos murs qui permettront à vos adversaires de prendre plus de temps pour les détruires.
 
 ![](img/defense1.png)
 
-After a wall is built, its square has only **1 hit point**. So if you want the wall to cause any trouble to the attackers for at least several hours (or even days), you should fortify it with the help of workers and the [`repair`](/api/#Creep.repair) action. The maximum number of hits you can repair the wall to is **300,000,000 hits**. If you spend much resources, such a wall can withstand attacks for many days. And it is just a single square, while you can build multiple rows of walls!
+Après qu'un mur est construit, il possède **1 point de vie**. Vous devez donc fortifier votre mur pour que vos ennemis prennent un bon moment avant de détruire complètement votre fortification. Vous pouvez utiliser l'action [`repair`](/api/#Creep.repair) de vos unités sur vos murs. Le nombre maximum de point de vie pour un mur est de **300,000,000 points**. Si vous fortifiez le mur à ce stade, il pourra résister pour plusieurs heures voir jours.
 
-## Passive defense: ramparts
+## Les défenses passives : les ramparts
 
-However, walls have a considerable disadvantage: they block not only hostile creeps, but your own ones too. Building walls at exits will prevent your own expansion from your room.
+Les murs, bien que pratique, on tout de même un inconvénient : ils bloque non seulement les unités hostiles mais les votre aussi ! Construire des murs proches de vos sortie peuvent bloquer votre propre expansion.
 
-This is why you have another passive defense means – **ramparts**. They behave like walls for hostile creeps by blocking their movements, while your creeps can freely pass through them. Furthermore, a creep on a rampart square is completely invulnerable to any kind of attack until the rampart is destroyed. Being protected, it can still attack opponents.
+Les **ramparts** sont une autre type de structure passive. Ils se comporte comme des murs pour les unités hostiles en bloquant leurs mouvement, pendant que vos unités peuvent les passer librement. De plus, une unité dans un rampart est invunérable à n'importe quelle attaque, jusqu'à ce que le rampart soit détruit et a la capacité d'attaquer de cette position.
 
 ![](img/defense2.png)
 
-In the same way as walls, ramparts are built with **1 hit point** initially and need to be fortified to a needed level by workers afterwards. The maximum amount of rampart hits depends on the **Room Controller level**. See more about that in the article [Control](/control.html).
+Dans la même logique que les murs, un rampart possède **1 point de vie** après construction et a aussi besoin d'être fortifié par vos unités. Le nombre maximum de point de vie pour un rampart dépend de votre **Room Controller level**. Plus de détails dans l'article [Le Contrôle](/control.html).
 
-A rampart has another peculiarity: its superior defense abilities must be constantly maintained at a proper level. Every few ticks, a rampart loses a few hit points, so you should assign a worker to make sure that all your ramparts stand alert and don't wear off.
+Le rampart possède une autre particularitée : il se doit d'être maintenu. Après un nombre de ticks, un rampart perd des points de vie, vous devez donc assigner vos unités pour être sûr que vos ramparts ne s'auto-détruise pas.
 
-## Active defense: towers
+## Les défenses actives : les tours
 
-While well-designed passive defenses may withstand attacks for many days (for example, while you are offline and out of the game), they will inevitably fall sometime. This is why it's utterly important not to rely on fortifications alone but install defense systems to repel opponents when needed.
+Un bon pattern de murs et de ramparts peut-être utile pour résister pour plusieurs jours (quand vous n'êtes pas devant votre machine), mais pourra un jour tomber. C'est pourquoi il est important de ne pas trop compter sur vos fortifications seulement mais d'y ajouter des systèmes de défense pour repousser vos adversaires.
 
 ![](img/defense3.png)
 
-You сan use **towers** for active defense which are available to build starting from room level 3. Unlike walls and ramparts, this defense means is active because using it requires you to spend energy by calling a tower's attack function. It can [`attack`](/api/#StructureTower.attack) and [`heal`](/api/#StructureTower.heal) creeps as well as [`repair`](/api/#StructureTower.repair) structures (for example broken walls and ramparts).
+Vous pouvez utiliser les **tours** pour vous défendre activement après avoir atteint le niveau 3 de votre salle. Cette structure n'est pas comme les murs ou ramparts car elle demande de la ressource d'énergie pour pouvoir fonctionner d'où son type de défense "active". Elle peux attaquer - [`attack`](/api/#StructureTower.attack) - et guérir vos unités - [`heal`](/api/#StructureTower.heal) - et aussi réparer vos structures - [`repair`](/api/#StructureTower.repair) - (exemple comme vos murs ou ramparts endommagés).
 
 {% note info %}
-The tower range covers the whole room, but the effect weakens with the distance to the target. Always place towers as close to their potential targets as possible.
+Le rayon d'action de vos tours couvre la totalité de votre salle mais l'effet est réduit selon la distance de la cible. Placez toujours vos tours au plus proches de leurs cibles potentielles.
 {% endnote %}
 
-Each action consumes **10 energy units**, so ensure that your creeps watch over energy supplies in the tower and replenish them when needed.   
+Chaque action utilise **10 point d'énergie**, soyez donc sûr que vos unités apporte les ressources nécessaire aux tours.
 
-Here is an example of a simple code to attack enemy creeps using towers in a room:
+Voici un exemple de code simple pour attaquer une unité énnemie en utilisant les tours :
 
     function defendRoom(roomName) {
         var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
@@ -64,18 +64,22 @@ Here is an example of a simple code to attack enemy creeps using towers in a roo
         }
     }
 
-## Active defense: creeps
+## Les défenses actives : vos unités
 
-While towers are a handy method of active defense, it’s not an ultimate panacea against any offense. A well-secured team of creep invaders are able to withstand the attack by multiple towers at point-blank range. Countering such an attack requires a symmetrical response: creep defenders.
+Les tours sont une manière éfficace pour une défense active mais ce n'est pas tout le temps éfficace surtout contre une offense que vous ne pouvez pas contrôler. Une bonne équipe hostile peuvent contourner voir faire pas mal de dégats à vos fortifications et tours. Contrer une telle attaque demande la même type de stratégie : utiliser des unités.
 
 ![](img/defense4.png)
 
-Since ramparts have an ability to protect everything on the same square from any damage, develop your defense system in such a way that any attacked square adjoins a creep defender covered by a rampart. But note that building them continuously, even in peacetime, is a waste of resources. It’s better to construct them quickly during a siege.
+Vu que les rampart ont la capacité de protéger vos unités si elles sont dans la même case que la structure, développer votre système de défense de façon à ce que vos unités puissent défendre vos forifications sans trop prendre de coups. Cependant, construire vos unités constamment, même quand vous n'êtes pas attaqué, est une grandre perte de ressources. Il est donc préférable de les construire rapidement durant un siège.
 
-Writing AI logic for such creeps is quite complicated, but it’s the only way to protect your rooms against virtually any encroachment.
+Ecrire la logique pour ce genre d'unités est complexe mais c'est la seul manière éfficace pour défendre votre salle convenablement.
 
 {% note info %}
-You can spawn [NPC invader creeps](/invaders.html) in your room in order to test your defences.
+Vous pouvez faire apparaitre des [NPC invader creeps](/invaders.html) dans votre salle pour tester vos défenses.
 {% endnote %}
 
-Therefore, designing good fortification system with proper behaviour logic will make your room a very difficult target for invaders. However, never rest on your laurels by hunkering down in your rooms. As we know, the best defense is offense.
+En résumé, construire vos murs & ramparts dans un pattern spécifique, lié à un bon positionnement de vos tours et une bonne gestion de vos unités donneront du fil à retord à vos adversaires. Eviter de vous recroqueviller dans vos salles, la meilleure défense est l'attaque.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

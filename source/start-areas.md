@@ -1,40 +1,44 @@
-title: Start Areas
+title: Zone de départs
 ---
 
-## Novice Areas
- 
-To allow each player start out in the game and develop a colony without facing veterans of the Screeps world, we’ve devised a system of special temporary sectors for novice players. They are marked in green, and the “**Novice Area**” label pops up as you hover the mouse pointer over them.
+## Zone de Novice
+
+Pour aider les joueurs à démarrer sans se faire écraser par les autres joureurs, un système de zones temporaire existe. Elles sont marqués en vert et le label “**Novice Area**” s'affiche lorsque vous mettez le curseur sur la zone.
 
 ![](img/novice.png)
 
-The following rules are in force in these rooms:
+Voici une liste des règles imposées lorsque vous êtes dans ces salles :
 
-*   The sector is completely separated from the outer world with a blind, indestructible wall preventing outside players from entering it. Getting inside a Novice Area is possible only by placing there your initial spawn directly.
-*   Only players with GCL 3 or lower is allowed to start playing in these rooms.
-*   Each player is allowed to [claim](/api/#Creep.claimController) not more than 3 rooms. But the room [reservation](/api/#Creep.reserveController) is unlimited.
-*   No cooldown between [safe mode](/defense.html) activations.
-*   It’s prohibited to use [Nukers](/api/#StructureNuker). 
+*   La zone est complètement séparé du monde exterieur avec un mur indestructible, évitant les joueurs exterieur à la zone d'y entrer. Entrer dans une zone Novice ne peux se faire qu'en réapparaissant dans la zone.
+*   Seuls les joueurs ayant un Niveau de Contrôle Global inférieur à 3 peuvent commencer dans ces salles.
+*   Chaque joueur est autorisé à prendre le [contrôle](/api/#Creep.claimController) de 3 salles maximum. La [réservation](/api/#Creep.reserveController) de salle est illimitée.
+*   Pas de temps de rechargement pour l'activation du mode ["Protection"](/defense.html)
+*   L'utilisation d'arme nucléaires - [Nukers](/api/#StructureNuker) - est bloqué.
 
-Novice Areas have the day counter. After it runs out, the walls disappear, rooms lose the green mark, all the limitations are cancelled, and the sector becomes a regular part of the world. After zones are opened, residents can start outward expansion, but can also face invasion into their sectors. 
+Les zones de Novice possède un compteur en jours. Dès que ce compteur tombe à 0, les salles perdent leur protection, les limitations sont retirées et la zone devient accessible de par tout le monde.
 
-The majority of novice sectors are divided into 4x4 room size quarters. Apart from the common outer wall that encircles the entire 10x10 sector, there are also inside walls that intersect these “quarters.” The counters of those walls are lower than the total Novice Area counter. It means that each resident starts out in the game by facing other players only in their own “quarter” first, but after a few days they can meet all the residents of the sector. 
+La majoritée des zone de Novice sont divisés en salles de 4x4 (cf. image ci-dessus). A part les murs qui entoure la zone complet (10x10), il y a aussi des murs interne qui sépare les "quartier". Le compteur est différent de celui de la zone, permettant aux joueurs dans leur "quartier" de pouvoir combattre entre eux s'ils le désirent.
 
-## Respawn Areas
+## Zone de réapparition
 
-Another similar kind of isolated world map zones is **Respawn Areas**. They are highlighted with blue color and have only the Nukers usage restriction. All players with any GCL can place their first spawn in this area and claim as many rooms as their GCL allows.
+Une autre type de zone isolée est la **Zone de réapparition**. Ces zones sont en bleu et n'ont seulement la restriction des armes nucléaires. Tout les joueurs peuvent apparaitre dans ces zones, qu'importe leur Niveau de Contrôle Global.
 
 ![chrome_2017-03-06_14-40-11.png](img/chrome_2017-03-06_14-40-11.png)
 
-## Areas generation in inner sectors
+## Génération de zones dans les secteurs
 
-We keep monitoring the Novice and Respawn Areas population progress and open new areas as it becomes necessary. Please mind that such areas can be allocated in previously opened sectors of the common world provided they are sufficiently big, not populated, and not in use by anyone. 
+Le serveur surveille la population dans les zones de Réapparition & zones de Novices et ouvre de nouvelles zones si nécessaire. Ces zones peuvent s'ouvrir dans des secteurs déjà présent du monde si la zone n'est pas ou peux peuplée et non utilisée par des joueurs.
 
 {% note info %}
-If you don’t want some rooms to get transformed into Novice or Respawn Areas, you should take care to [reserve](/api/#Creep.reserveController) them.
+Si vous nous souhaitez pas que certaines salles ne se transforme en zone de Novice ou zone de Réapparition, vous devez prendre le pas de [réserver](/api/#Creep.reserveController) ces salles
 {% endnote %}
 
-When a Novice or Respawn Area is being planned in an inner sector, all free rooms in this sector will be signed by the game with the following message:
+Quand une zone de Novice ou de Réapparition est prévu dans un secteur, toute les salles libre auront un signe ajouté par le jeu avec le message suivant :
 
 ![chrome_2017-03-08_13-01-20.png](img/chrome_2017-03-08_13-01-20.png)
 
-You can use game constants `SYSTEM_USERNAME`, `SIGN_NOVICE_AREA`, and `SIGN_RESPAWN_AREA` to programmatically check the signs in the rooms that are important to you and reserve them if such a message detected.
+Vous pouvez utiliser les constante `SYSTEM_USERNAME`, `SIGN_NOVICE_AREA`, and `SIGN_RESPAWN_AREA` dans votre code pour vérifier si vous devez rapidement prendre contrôle de la salle ou pas.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

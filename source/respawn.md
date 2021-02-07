@@ -1,30 +1,34 @@
-title: Respawning
+title: Réapparition
 ---
 
-In Screeps, the game is never over, and a global win of any player is hardly ever possible. The game is devised in such a way that you can always continue playing, gain revenge, change landscape, save your achievements, etc.
+Dans Screeps, le jeu ne se fini jamais et une victoire totale d'un joueur est difficilement possible. Le jeu est créé pour que vous continuez à jouer, prendre votre revenche, changer la donne durant votre expansion, etc...
 
-## Initial spawn
+## Apparition initiale
 
-The game begins from your appearance on the map. You can choose any room with a neutral Controller and at least one energy source, although we recommend to choose a room with two sources and inside one of the [Start Areas](/start-areas.html). So, after analyzing the landscape, place your spawn on the map:
+Le jeu commence avant votre apparition avec la carte affichée. A ce stade vous pouvez choisir une salle avec un Contrôlleur neutre et avec au moins une source d'énergie. Nous vous conseillons de choisir une salle avec au moins 2 sources et dans une [zone de départ](/start-areas.html). Dès que vous avez choisi votre salle, placez votre premier **point d'apparition** (_spawn_).
 
 ![](img/CreateSpawn.png)
 
-Now the room is in [Safe mode](/defense.html) during **20,000 game ticks** (approx. 15** **hours depending on the tick duration). Use this period to explore the room, develop, plan defenses, and prepare for capturing territory and resources. 
+Votre salle est par défaut en mode ["Protection"](/defense.html) durant **20,000 cycles** (_tick_ | environ 15-20 heures selon la durée d'un cycle). Utilisez ce temps pour vous développer, plannifier vos défenses et vous préparer pour la capture de territoire et de ressources.
 
-When the spawn is placed, it has 300 energy units first. For your safety, the spawn is constantly refilled with a small amount of 1 energy unit per tick, so that you won't stuck without energy. 
+Quand votre **point d'apparition** est placé, il possède 300 points d'énergie par défaut. Pour votre sécurité, votre point d'apparition se remplie à la vitesse d'un point d'énergie par cycle.
 
 {% note info %}
-A spawn stops generating energy when there are 300 energy units in the spawn itself or any other spawns and extensions in the room.
+Un point d'apparition s'arrête de générer de l'énergie quand il possède les 300 points d'énergie ou dans un autre point d'apparition ou extensions présent dans votre salle.
 {% endnote %}
 
-## Respawn
+## Réapparaitre
 
-If you have chosen hastily and now want to move to a more interesting room, or if another player forced you to do so, you can restart the game with the help of the **Respawn** feature. It has a 180 seconds timeout. You will also need to respawn if your rooms are captured by an enemy and you don't have an extra foothold with creeps to build a spawn. 
+Si vous avez choisi trop vite et souhaitez changer de salle ou que vous n'avez plus le contrôle de vos salles, vous pouvez recommencer le jeu avec l'aide de la fonction **Respawn**. Cette fonction a un temps d'attente de 180 secondes avant de vous laisser la capacité de poser votre nouveau point d'apparition.
 
 ![](img/Respawn.png)
 
 ![](img/RespawnConfirm.png)
 
-As you have already known from the article [Control](/control.html), a player's **Global Control Level** (GCL) remains the same after the Respawn. So, if you have a right to claim 3 rooms, you will never lose it.  
+Comme vous le savez déjà, grâce à l'article sur [Le Contrôle](/control.html), votre **Niveau de Contrôle Global** (GCL) reste le même après votre réapparition. Si vous avez donc le niveau 3 de GCL, vous pouvez toujours contrôller jusqu'à 3 salles en même temps.
 
-Always try to control as many rooms as your GCL allows. It will allow your colony develop at the maximum speed. Even after a respawn from scratch, a high GCL will let you find a place with many free rooms and instantly claim some into your domain for parallel development.
+Essayez toujours de capturer le nombre de salles que votre Niveau de Contrôle Global vous le permet. Cela vous permet de développer rapidement votre empire.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

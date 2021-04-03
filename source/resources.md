@@ -1,71 +1,70 @@
-title: Resources
+title: Les Ressources
 ---
 
-There are 4 kinds of resources in the game: **energy**, **minerals**, **power**, and **commodities**. 
-Resources can be harvested, processed, traded on the market, carried by creeps, and stored in structures.
-All resource kinds have different purposes, and you start playing only with access to the most basic one: energy.
+Il existe 4 types de ressources dans le jeu : **l'énergie**, **les minerais**, **la puissance** et **les commodités**.
+Ces ressources peuvent être récoltée, transformée ou échangée dans le marché, transportée par vos unités et stockée dans certaines structures.
+Toutes les ressources ont différente utilisation et vous commencer avec la plus basique : l'énergie.
 
-## Energy
-
-{% note info %}
-**Where to get:** a [`Source`](/api/#Source) in almost any room. <br>
-**How to get:** send a creep with a `WORK` part and [`harvest`](/api/#Creep.harvest) it. <br>
-**Needed for:** spawning creeps, building structures.
-{% endnote %} 
-
-Energy is the main construction material in the Screeps world. Your base works on energy, so harvesting plenty of it is vital for any colony.
-You can harvest energy not only in your home room, but also in other rooms remotely to increase energy income.
-
-## Minerals
+## L'énergie
 
 {% note info %}
-**Where to get:** a [`Mineral`](/api/#Mineral) in almost any room. <br>
-**How to get:** build a [`StructureExtractor`](/api/#StructureExtractor), send a creep with a `WORK` part, and [`harvest`](/api/#Creep.harvest) it. <br>
-**Needed for:** boosting creeps' capabilities, and also for producing trade commodities.
+**Où en trouver:** une [`Source`](/api/#Source) dans toute les salles. <br>
+**Comment récupérer:** envoyez une unité avec une partie de corp `WORK` et utilisez l'action [`récolter`](/api/#Creep.harvest) sur la source. <br>
+**Utilisé pour:** apparition d'unité, construction de structures.
 {% endnote %}
 
-By mining and processing minerals, you can significantly speed up your economy and boost the effectiveness of your creeps.
+L'énergie est la ressource principale du monde Screeps. Votre base fonctionne avec l'énergie vous devez donc en récolter le plus possible. Vous pouvez récolter de l'énergie dans votre salle mais aussi dans d'autres salles pour augmenter votre récolte.
 
-Working with minerals consists of 3 steps:
+## Les mineraux
 
-### Harvesting
+{% note info %}
+**Où en trouver:** un [`Mineral`](/api/#Mineral) dans toute les salles. <br>
+**Comment récupérer:** construisez un [`Extracteur`](/api/#StructureExtractor), envoyez une unité avec une partie de corp `WORK`, et utilisez l'action [`récolter`](/api/#Creep.harvest) sur l'extracteur. <br>
+**Utilisé pour:** améliorer les capacités de vos unités et pour produire de meilleures commodités.
+{% endnote %}
 
-There are 7 types of base minerals shown in the picture below.
+En récoltant et transformant vos mineraux, vous pouvez augmenter rapidement votre économie et l'éfficacité de vos unités.
+
+Utiliser les mineraux consiste en 3 étapes:
+
+### La récolte
+
+Il y a 7 type de mineral de base, visible ci-dessous.
 
 ![](img/minerals-01.png)
- 
-Each room contains only one mineral type, so in order to handle them effectively you need either access to several suitable rooms or trade relationships with other players.
 
-<img src="img/mining_minerals.png" align="right">A mineral deposit is located in a room at a spot marked by a special symbol. To start mining the deposit, you need to construct the special structure [**Extractor**](/api/#StructureExtractor) on top of it (available at Room Controller Level 6). Upon building it, you can start applying the method [`harvest`](/api/#Creep.harvest) to the deposit thus mining the corresponding mineral in the same way you harvest energy.
+Chaque salles contient 1 type de mineral. Pour récolter d'autres types, vous devez accéder à d'autres salles ou faire des échanges avec les joueurs.
 
-### Mineral compounds
+<img src="img/mining_minerals.png" align="right">Un mineral est situé dans une salle marqué par une lettre. Pour récolter le mineral, vous devez construire dessus un [**Extracteur**](/api/#StructureExtractor) (disponible au Niveau de Contrôle de Salle 6). Après construction, vous pouvez utiliser l'action [`récolte`](/api/#Creep.harvest) d'une de vos unité par la même façon que vous récolter l'énergie.
 
-Base minerals are useless on their own. In order to impart some useful capabilities to them, you have to combine them according to special formulas in the structure called [**Lab**](/api/#StructureLab).
+### Combiner les mineraux
+
+Les mineraux de base n'ont pas d'utilité tel quel. Pour pouvoir les utiliser, vous devez les combiner selon des formules dans la structure appelée [**Lab**](/api/#StructureLab).
 
 ![](img/minerals-02.png)
 
-One reaction requires three labs: two as reagent sources, and the third one as the produce collector. The labs should be within the range of 2 squares from each other. One lab cannot contain more than one mineral type at the same time.
+Une simple réaction demande 3 labs : 2 en tant que source contenant tout deux leurs mineraux, les réactifs et un troisième lab qui produira la production. Le rayon d'action se doit d'être au maximum de 2 cases par labs. Un Lab ne peux contenir qu'un seul type de mineral à la fois.
 
 <img src="img/2016-03-09_10-32-33.gif" align="right">
 
-    var labs = room.find(FIND_MY_STRUCTURES, 
+    var labs = room.find(FIND_MY_STRUCTURES,
         {filter: {structureType: STRUCTURE_LAB}});
 
     labs[0].runReaction(labs[1], labs[2]);
 
-    // on the next tick...
+    // au cycle suivant...
 
     console.log(labs[0].mineralType) // -> OH
     console.log(labs[1].mineralType) // -> O
     console.log(labs[2].mineralType) // -> H
 
-### Creep boosts
+### Augmenter les creeps
 
-Apart from running chemical reactions with minerals, a lab can use resulting compounds to permanently upgrade your creeps boosting their specific properties.
+Un laboratoire n'est pas destiné à faire des réactions, il peux aussi utiliser les composés pour augmenter de façon permanente leurs propriétés.
 
-Each compound is applied to one body part of the creep of a certain type using the [`StructureLab.boostCreep`](/api/#StructureLab.boostCreep) method according to the table below and boosts the effectiveness of one of the actions of this creep. The boosted part works as two, three, or even four corresponding parts. To boost the whole creep, you need to boost all its parts of the given type.
+Chaque composés est applicable sur un seul partie de corps de votre unité d'un certain type en utilisant la méthode [`StructureLab.boostCreep`](/api/#StructureLab.boostCreep) selon la table ci-dessous et augmentera l'éfficacité d'une ou de plusieurs actions. Les partie de corps augmentées compte comme deux, trois voir quatre fois la même partie de corps. Pour augmenter l'unité dans son entièreté, vous devez donc augmenter chacune des parties de son corps de chaque types.
 
-Boosting one body part takes 30 mineral compound units and 20 energy units. One body part can be boosted only with one compound type.
+Augmenter une partie de corps prend 30 unités de composés et 20 unités d'énergie. Une partie du corps ne peux être augmenté qu'avec un seul composé.
 
 <style>
 .minerals,
@@ -104,7 +103,7 @@ Boosting one body part takes 30 mineral compound units and 20 energy units. One 
 .commodities img {
     margin-right: 5px;
     vertical-align: middle;
-} 
+}
 .minerals__divider th {
     background-color: #333;
     color: #ffe099;
@@ -132,8 +131,8 @@ Boosting one body part takes 30 mineral compound units and 20 energy units. One 
 
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Mineral compounds</span>
-<em>(click to expand)</em>
+<span>Composés</span>
+<em>(cliquer pour agrandir)</em>
 </div>
 
 <div class="collapsible-table__content">
@@ -147,14 +146,14 @@ Boosting one body part takes 30 mineral compound units and 20 energy units. One 
 </colgroup>
 <tbody>
 <tr class=minerals__head>
-<th>Name</th>
-<th>Formula</th>
-<th>Time</th>
-<th>Body part</th>
-<th>Effect</th>
+<th>Nom</th>
+<th>Formule</th>
+<th>Temps</th>
+<th>Partie de Corps</th>
+<th>Effet</th>
 </tr>
 <tr class=minerals__divider>
-<th colspan="5" align="center">Base compounds</th>
+<th colspan="5" align="center">Composé de base</th>
 </tr>
 <tr>
 <td>![](//static.screeps.com/upload/mineral-icons/OH.png)hydroxide</td>
@@ -409,53 +408,53 @@ Boosting one body part takes 30 mineral compound units and 20 energy units. One 
 </div>
 
 
-## Commodities
+## Commodités
 
 {% note info %}
-**Where to get:** a [`Deposit`](/api/#Deposit) in "highway" rooms. <br>
-**How to get:** send a creep with a `WORK` part and [`harvest`](/api/#Creep.harvest) it. <br>
-**Needed for:** producing trade commodities and earning credits.
+**Où en trouver:** un [`Dépôt`](/api/#Deposit) dans les salles "autoroutes". <br>
+**Comment récupérer:** envoyez une unité avec une partie de corp `WORK`, et utilisez l'action [`récolter`](/api/#Creep.harvest) dessus. <br>
+**Utilisé pour:** produire des comodités échangable au marché et pour gagner des crédits.
 {% endnote %}
 
-Trade commodities are resources that NPC market traders are most interested in. These resources have no other purpose
-other than to be sold and generate credits. Producing high-level commodities is the most profitable business in the game.
+Les Commodités sont des ressources que des PNJ sont intéressés. Ces ressources n'ont pas d'autres utilité que d'être échangés pour des crédits.
+Produire des commodités de haut niveau est la manière la plus profitable dans le jeux.
 
 
-### Harvesting
+### Récolter des commodités
 
-You harvest raw commodities from a [`Deposit`](/api/#Deposit) in "highway" rooms that divide living sectors on the map.
-There are 4 types of raw resources: Metal, Silicon, Biomass, Mist. 
-They are distributed unevenly across the world map: one resource type per map quadrant (NW, NE, SW, SE). 
+Vous pouvez récolter des commodités pures depuis un [`Dépôt | Deposit`](/api/#Deposit) dans les salles "autoroutes" qui divise les différents secteurs jouables sur la carte.
+Il existe 4 types de comodités pures : le Métal (Metal), le Silicone (Silicon), la Biomasse (Biomass) et le Mist (pas de traduction).
+Ces commodités pures sont distribuées aléatoirement partout dans la carte du monde: une ressource par type par quadrant de la carte (Nord Ouest, Nord Est, Sud Ouest, Sud Est)
 
 ![](img/commodities.png)
 
-Unlike minerals, these deposits exhaust as you harvest them: the more you harvest, the longer cooldown becomes. 
-They vanish when you stop harvesting it after some time, and reappear elsewhere nearby. 
-Also, a new deposit will appear in the sector if all other deposits are exhausted below some level.
+Différent des minéraux, ces dépôts s'épuise à chaque récolte : plus vous récoltez, plus le temps de recharge augmente.
+Ils disparaissent lorsque vous ne récoltez plus pendant un certains temps et apparaisse à nouveau autre part.
+Aussi, un nouveau dépôt apparait dans le secteur lorsque tout les autres dépôts sont épuisés à un certain niveau.
 
-### Basic commodities
+### Commodités de base
 
-Selling raw resources may be not very profitable. 
-This is why it's a better idea to build a [**Factory**](/api/#StructureFactory) (available at RCL 7) in order to [`produce`](/api/#StructureFactory.produce) more complex commodities.
+Vendre des commodités pures n'est pas profitable.
+C'est pourquoi il est préférable de construire une [**Usine (Factory)**](/api/#StructureFactory) (disponible au RCL 7) pour [`produire`](/api/#StructureFactory.produce) des commodités plus complexes.
 
-A newly built factory has no level which means it can produce just a few basic commodities out of all kinds of existing resources ("any level" tier in the tables below). 
-They also can be used to store resources in a "compressed" form.
+Une Usine construite n'a pas de niveau, cela signifie qu'elle peux produire des commodités de tout types (rang "tout niveaux" dans le tableau ci-dessous).
+Elle peux aussi être utilisée pour stocker des ressources dans une forme "comprimée".
 
 <div class="collapsible-table">
 
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Compressing commodities</span>
-<em>(click to expand)</em>
+<span>Commodités comprimées</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities1.png)
 </div>
 
-<div class="collapsible-table__content"> 
+<div class="collapsible-table__content">
 <table class="commodities">
 <tbody>
 <tr class=commodities__head>
-<th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th>
-</tr> 
+<th>Produit</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th>
+</tr>
 <tr><td>{% resource 'Utrium bar' %}&nbsp;&times;&nbsp;<em>100</em></td><td>Any level</td><td>![](//static.screeps.com/upload/mineral-icons/U.png)Utrium&nbsp;&times;&nbsp;<em>500</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
 <tr><td>{% resource "Lemergium bar" %}&nbsp;&times;&nbsp;<em>100</em></td><td>Any level</td><td>![](//static.screeps.com/upload/mineral-icons/L.png)Lemergium&nbsp;&times;&nbsp;<em>500</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>100</em></td><td>Any level</td><td>![](//static.screeps.com/upload/mineral-icons/Z.png)Zynthium&nbsp;&times;&nbsp;<em>500</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
@@ -470,21 +469,21 @@ They also can be used to store resources in a "compressed" form.
 
 </div>
 </div>
- 
- You can decompress to recover raw resources when you need them. 
- 
+
+ Vous pouvez décompresser pour récupere vos ressource pures quand vous le voulez.
+
  <div class="collapsible-table">
- 
+
  <div class="collapsible-table__header">
  <i class="fa fa-plus-square"></i>
- <span>Decompressing commodities</span>
- <em>(click to expand)</em>
+ <span>Décompressage des commodités</span>
+ <em>(cliquer pour agrandir)</em>
  ![](img/commodities2.png)
  </div>
- 
+
  <div class="collapsible-table__content">
  <table class="commodities">
- <tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr> 
+ <tr class="commodities__head"><th>Produit</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
  <tr><td>![](//static.screeps.com/upload/mineral-icons/U.png)Utrium&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Utrium bar' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
  <tr><td>![](//static.screeps.com/upload/mineral-icons/L.png)Lemergium&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Lemergium bar' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
  <tr><td>![](//static.screeps.com/upload/mineral-icons/Z.png)Zynthium&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
@@ -494,25 +493,25 @@ They also can be used to store resources in a "compressed" form.
  <tr><td>![](//static.screeps.com/upload/mineral-icons/H.png)Hydrogen&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
  <tr><td>![](//static.screeps.com/upload/mineral-icons/X.png)Catalyst&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Purifier' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
  <tr><td>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>500</em></td><td>Any level</td><td>{% resource 'Battery' %}&nbsp;&times;&nbsp;<em>50</em></td><td>10&nbsp;ticks</td></tr>
- </table> 
+ </table>
 
  </div>
  </div>
- 
- When you gain access to regional deposit resources, you can start producing additional basic commodities from them.
- 
+
+ Quand vous avez accès aux dépôts, vous pouvez commencer à produire des commodités de base.
+
 <div class="collapsible-table">
 
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Basic regional commodities</span>
-<em>(click to expand)</em>
+<span>Commodités de base</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities3.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr> 
+<tr class="commodities__head"><th>Produit</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Wire' %}&nbsp;&times;&nbsp;<em>20</em></td><td>Any level</td><td>{% resource 'Utrium bar' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Silicon' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Cell' %}&nbsp;&times;&nbsp;<em>20</em></td><td>Any level</td><td>{% resource 'Lemergium bar' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Biomass' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td>
 <tr><td>{% resource 'Alloy' %}&nbsp;&times;&nbsp;<em>20</em></td><td>Any level</td><td>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Metal' %}&nbsp;&times;&nbsp;<em>100</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td></tr>
@@ -521,34 +520,33 @@ They also can be used to store resources in a "compressed" form.
 </div>
 </div>
 
-All commodities above can be produced in a factory of any level.
+Toutes les commodités ci-dessus peuvent être produits dans une usine de n'importe quel niveau.
 
-### Higher commodities
-  
-The full use of factories is possible with [Operators](power.html#Power-Creeps) only, and their `OPERATE_FACTORY` power. 
-When an Operator uses this power on a factory without a level, the level of the factory is permanently set to the level of the power, and the same effect is applied on the factory. 
-It enables the factory to produce commodities of the corresponding level. 
-The factory can only produce commodities of exactly the same level, or "any level" commodities. 
-Once set, the factory level cannot be changed. 
-When the effect duration ends, the factory simply becomes inactive, but its level remains the same ("any level" commodities are still available though). 
-You need an Operator with the same power level to reactivate it again. 
-Another level cannot be applied, the only way to change the factory level is to rebuild it.
-  
-Each of high-level commodities requires lower level commodities to be produced which forms production chains. There are four production chains, one for each of new resource types: 
-**Mechanical** (consumes Metal), **Electronical** (consumes Silicon), **Biological** (consumes Biomass), and **Mystical** (consumes Mist), as well as common components. 
-These commodities have the most lucrative prices on the market.
+### Commodités de valeurs
+
+L'utilisation complète d'une usine est possible avec un [Opérateur](power.html#Power-Creeps) seulement et leur pouvoir `OPERATE_FACTORY`.
+Quand un Opérateur utilise son pouvoir sur une usine sans niveau, son niveau est réglé en permanence au niveau de la puissance de l'Opérateur et un effet est appliqué.
+Cela active de nouveaux composants possible selon le niveau.
+L'usine ne peux produire seulement des commodités de son niveau ou de "tout niveau".
+Le niveau d'une usine ne peux être mis à jour.
+Quand le temps de durée de l'effet tombe à zero, l'usine devient inactive et son niveau est gardé (les commodités de "tout niveau" sont toujours réalisable).
+Vous aurez donc besoin de votre Opérateur avec le même niveau de puissance pour réactiver l'usine.
+Pour changer le niveau d'usine vous devrez la construire à nouveau.
+
+Chaque niveau de commodité de valeurs requier des commodités de niveau inférieur pour être produit formant des chaines de production. Il existe 4 chaines de productions une pour chaque type : **Méchanique** (consomme du Métal), **Electronique** (consomme du Silicone), **Biologique** (consumme de la Biomasse) et **Mystique** (consumme du Mist) en plus de resources génériques.
+Ces commodités ont le plus de valeur dans le marché.
 
 <div class="collapsible-table">
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Common higher commodities</span>
-<em>(click to expand)</em>
+<span>Commodités communes de valeurs</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities4.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr> 
+<tr class="commodities__head"><th>Produits</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Composite' %}&nbsp;&times;&nbsp;<em>20</em></td><td>Lvl 1</td><td>{% resource 'Utrium bar' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>20</em></td><td>50&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Crystal' %}&nbsp;&times;&nbsp;<em>6</em></td><td>Lvl 2</td><td>{% resource 'Lemergium bar' %}&nbsp;&times;&nbsp;<em>6</em><br>{% resource 'Keanium bar' %}&nbsp;&times;&nbsp;<em>6</em><br>{% resource 'Purifier' %}&nbsp;&times;&nbsp;<em>6</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>45</em></td><td>21&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Liquid' %}&nbsp;&times;&nbsp;<em>12</em></td><td>Lvl 3</td><td>{% resource 'Oxidant' %}&nbsp;&times;&nbsp;<em>12</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>12</em><br>{% resource 'Ghodium melt' %}&nbsp;&times;&nbsp;<em>12</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>90</em></td><td>60&nbsp;ticks</td></tr>
@@ -559,14 +557,14 @@ These commodities have the most lucrative prices on the market.
 <div class="collapsible-table">
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Mechanical chain</span>
-<em>(click to expand)</em>
+<span>Chaine Méchanique</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities5.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr>
+<tr class="commodities__head"><th>Produits</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Tube' %}&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 1</td><td>{% resource 'Alloy' %}&nbsp;&times;&nbsp;<em>40</em><br>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>16</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>8</em></td><td>45&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Fixtures' %}</td><td>Lvl 2</td><td>{% resource 'Composite' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Alloy' %}&nbsp;&times;&nbsp;<em>41</em><br>{% resource 'Oxidant' %}&nbsp;&times;&nbsp;<em>161</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>8</em></td><td>115&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Frame' %}</td><td>Lvl 3</td><td>{% resource 'Fixtures' %}&nbsp;&times;&nbsp;<em>2</em><br>{% resource 'Tube' %}&nbsp;&times;&nbsp;<em>4</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>330</em><br>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>31</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>125&nbsp;ticks</td></tr>
@@ -579,14 +577,14 @@ These commodities have the most lucrative prices on the market.
 <div class="collapsible-table">
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Biological chain</span>
-<em>(click to expand)</em>
+<span>Chaine Biologique</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities6.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr>
+<tr class="commodities__head"><th>Produits</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Phlegm' %}&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 1</td><td>{% resource 'Cell' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Oxidant' %}&nbsp;&times;&nbsp;<em>36</em><br>{% resource 'Lemergium bar' %}&nbsp;&times;&nbsp;<em>16</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>8</em></td><td>35&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Tissue' %}&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 2</td><td>{% resource 'Phlegm' %}&nbsp;&times;&nbsp;<em>10</em><br>{% resource 'Cell' %}&nbsp;&times;&nbsp;<em>10</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>110</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>164&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Muscle' %}</td><td>Lvl 3</td><td>{% resource 'Tissue' %}&nbsp;&times;&nbsp;<em>3</em><br>{% resource 'Phlegm' %}&nbsp;&times;&nbsp;<em>3</em><br>{% resource 'Zynthium bar' %}&nbsp;&times;&nbsp;<em>50</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>50</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>250&nbsp;ticks</td></tr>
@@ -599,14 +597,14 @@ These commodities have the most lucrative prices on the market.
 <div class="collapsible-table">
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Electronical chain</span>
-<em>(click to expand)</em>
+<span>Chaine Electronique</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities7.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr>
+<tr class="commodities__head"><th>Produits</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Switch' %}&nbsp;&times;&nbsp;<em>5</em></td><td>Lvl 1</td><td>{% resource 'Wire' %}&nbsp;&times;&nbsp;<em>40</em><br>{% resource 'Oxidant' %}&nbsp;&times;&nbsp;<em>95</em><br>{% resource 'Utrium bar' %}&nbsp;&times;&nbsp;<em>35</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>20</em></td><td>70&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Transistor' %}</td><td>Lvl 2</td><td>{% resource 'Switch' %}&nbsp;&times;&nbsp;<em>4</em><br>{% resource 'Wire' %}&nbsp;&times;&nbsp;<em>15</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>85</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>8</em></td><td>59&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Microchip' %}</td><td>Lvl 3</td><td>{% resource 'Transistor' %}&nbsp;&times;&nbsp;<em>2</em><br>{% resource 'Composite' %}&nbsp;&times;&nbsp;<em>50</em><br>{% resource 'Wire' %}&nbsp;&times;&nbsp;<em>117</em><br>{% resource 'Purifier' %}&nbsp;&times;&nbsp;<em>25</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>250&nbsp;ticks</td></tr>
@@ -619,14 +617,14 @@ These commodities have the most lucrative prices on the market.
 <div class="collapsible-table">
 <div class="collapsible-table__header">
 <i class="fa fa-plus-square"></i>
-<span>Mystical chain</span>
-<em>(click to expand)</em>
+<span>Chaine Mystique</span>
+<em>(cliquer pour agrandir)</em>
 ![](img/commodities8.png)
 </div>
 
 <div class="collapsible-table__content">
 <table class="commodities">
-<tr class="commodities__head"><th>Product</th><th>Factory</th><th>Components</th><th>Cooldown</th></tr>
+<tr class="commodities__head"><th>Produits</th><th>Niveau</th><th>Composants</th><th>Temps de recharge</th></tr>
 <tr><td>{% resource 'Concentrate' %}&nbsp;&times;&nbsp;<em>3</em></td><td>Lvl 1</td><td>{% resource 'Condensate' %}&nbsp;&times;&nbsp;<em>30</em><br>{% resource 'Keanium bar' %}&nbsp;&times;&nbsp;<em>15</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>54</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>12</em></td><td>41&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Extract' %}&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 2</td><td>{% resource 'Concentrate' %}&nbsp;&times;&nbsp;<em>10</em><br>{% resource 'Condensate' %}&nbsp;&times;&nbsp;<em>30</em><br>{% resource 'Oxidant' %}&nbsp;&times;&nbsp;<em>60</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>128&nbsp;ticks</td></tr>
 <tr><td>{% resource 'Spirit' %}</td><td>Lvl 3</td><td>{% resource 'Extract' %}&nbsp;&times;&nbsp;<em>2</em><br>{% resource 'Concentrate' %}&nbsp;&times;&nbsp;<em>6</em><br>{% resource 'Reductant' %}&nbsp;&times;&nbsp;<em>90</em><br>{% resource 'Purifier' %}&nbsp;&times;&nbsp;<em>20</em><br>{% resource 'Energy' %}&nbsp;&times;&nbsp;<em>16</em></td><td>200&nbsp;ticks</td></tr>
@@ -637,12 +635,17 @@ These commodities have the most lucrative prices on the market.
 </div>
 
 
-## Power
+## Puissance
 
 {% note info %}
-**Where to get:** a [`StructurePowerBank`](/api/#StructurePowerBank) in "highway" rooms. <br>
-**How to get:** destroy the structure and loot the dropped resource. <br>
-**Needed for:** creating Power Creeps.
+**Où en trouver:** une [`StructurePowerBank`](/api/#Source) dans les salles "autoroutes". <br>
+**Comment récupérer:** détruire la structure et récupérer les ressources au sol. <br>
+**Utilisé pour:** la création de Creeps de Puissance.
 {% endnote %}
 
-See this article for more info: [Power](power.html).
+
+Voir l'article suivant pour plus d'informations : [Puissance](power.html).
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

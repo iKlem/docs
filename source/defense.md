@@ -9,7 +9,7 @@ Quand vous commencer dans le jeu, le mode **"Protection"** sera activé dans vot
 
 ![](img/safe_mode.png)
 
-Le mode "Protection" reste actif pendant **20,000 ticks** (environ 20 heures selon la durée d'un tick). Cependant, si le Controlleur de la salle possède des activation en plus, vous pouvez à tout moment activer de nouveau le mode "Protection" en utilisant la méthode [`StructureController.activateSafeMode`](/api/#StructureController.activateSafeMode):
+Le mode "Protection" reste actif pendant **20,000 cycles** (environ 20 heures selon la durée d'un cycle). Cependant, si le Controlleur de la salle possède des activation en plus, vous pouvez à tout moment activer de nouveau le mode "Protection" en utilisant la méthode [`StructureController.activateSafeMode`](/api/#StructureController.activateSafeMode):
 
     Game.rooms.W1N1.controller.activateSafeMode()
 
@@ -35,7 +35,7 @@ Les **ramparts** sont une autre type de structure passive. Ils se comporte comme
 
 Dans la même logique que les murs, un rampart possède **1 point de vie** après construction et a aussi besoin d'être fortifié par vos unités. Le nombre maximum de point de vie pour un rampart dépend de votre **Room Controller level**. Plus de détails dans l'article [Le Contrôle](/control.html).
 
-Le rampart possède une autre particularitée : il se doit d'être maintenu. Après un nombre de ticks, un rampart perd des points de vie, vous devez donc assigner vos unités pour être sûr que vos ramparts ne s'auto-détruise pas.
+Le rampart possède une autre particularitée : il se doit d'être maintenu. Après un nombre de cycles, un rampart perd des points de vie, vous devez donc assigner vos unités pour être sûr que vos ramparts ne s'auto-détruise pas.
 
 ## Les défenses actives : les tours
 

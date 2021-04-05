@@ -1,48 +1,54 @@
-title: Market System
+title: Le Marché
 ---
 
-The market in Screeps allows to trade various resources between players by means of special structures called [Terminals](/api/#StructureTerminal). They are able to instantly transfer resources to other rooms at any distance.
+Le marché dans Screeps permet de faire des échanges de ressources entre joueurs grâce à une structure spéciale appelée [Terminal](/api/#StructureTerminal). Le Terminal permet d'envoyer des ressources instantanément vers d'autres salles qu'importe la distance.
 
-Trading on this market requires the in-game currency called **Credits**. Your credits are tied to your account and serve to execute your market orders.
-
-{% note info %}
-In order to get your first credits, deal with someone who already has a market buy order.
-{% endnote %}
-
-## Market orders
-
-The market system is based on **sell and buy orders** tied to your terminals. By creating an order, you designate the terminal, type, and amount of the resource to sell or buy, as well as its price for one unit in credits. Each placed order is visible to all the players in all the game world at the [Market](https://screeps.com/a/#!/market) page or via API method [`Game.market.getAllOrders`](/api/#Game.market.getAllOrders). Creating any order is subject to a 5% fee in credits.
-
-To execute a trade, the second party also has to have a terminal to receive the resource (when buying from a sell order) or to send out (when selling to a buy order). You complete a trade by using the market interface or the method [`Game.market.deal`](/api/#Game.market.deal) and designating the other player's order, your terminal, and the amount of resources wanted. Then the two terminals automatically carry out the transaction, the buyer's account is charged with the corresponding amount of credits, and this amount is passed to the seller.
+Le commerce dans le jeu requiers des **Crédits**. Vos crédits son lié à votre compte et vous permet de faire vos achats dans le marché.r market orders.
 
 {% note info %}
-The energy expenses to transfer resources from one terminal to another are always on the party who executes the deal rather than the order's owner, even in the case of buying a resource upon a sell order. The same is true for terminal cooldown.
+Pour avoir vos premier crédits, faites un échange avec quelqu'un qui a fait une demande d'achat.
 {% endnote %}
 
-An order cannot be executed until the selling terminal has enough resource to sell, or the user has enough credits to buy. Until that happens, the order remains inactive.
+## Ordre de marché
 
-## Examples
+Le marché est basé sur un système **d'achats et de ventes** lié aux différents terminaux. En créant un ordre, vous désignez le terminal, le type de ressource et la quantité à acheter ou vendre et le prix pour 1 unité en crédits. Chaque ordre est visible par tout les joueurs grâce au [Marché](https://screeps.com/a/#!/market) ou via la méthode [`Game.market.getAllOrders`](/api/#Game.market.getAllOrders). Créer un ordre est sujet à des frais de 5% en crédits.
 
-Here are a few examples to understand the underlying mechanics.
+Pour réaliser un échange, l'autre partie se dois posséder un terminal pour recevoir les ressources (lors d'un achat d'un ordre de vente) ou pour envoyer (lors d'une vente d'un ordre d'achat). Un échange est réalisable à partir de l'interface du Marché ou par la méthode [`Game.market.deal`](/api/#Game.market.deal) en désignant l'ordre de l'autre joueur, votre terminal contenant la quantité de ressources souhaité. Les deux terminaux vont automatiquement faire les transactions, l'acheteur se vera chargé des crédits correspondant qui sont passé au vendeur.
 
-*   Assume that the player Alice creates a buy order for 1000 units of utrium acid at the price 10 Cr a unit. To create this order, Alice designates her terminal in the room W1N1 and instantly pays a 500 Cr fee.
-*   Player Bob discovers Alice's order and decides to sell 200 units of utrium acid from his reserves. Bob's terminal is in the room W4N2, i.e. 3 rooms away. Therefore, his expenses on sending 200 units of the resource will be 60 of energy. Bob executes the trade on the given order, and 200 of ultrium acid are automatically transported from W4N2 to W1N1, Bob gets 2,000 Cr, and Bob's terminal in W4N2 loses 60 energy units.
-*   Now Bob wants to spend these credits and buy some energy from the player Charlie who offers it through his sell order in the room W1N5 at the price of 0.5 Cr per unit. The 2,000 Cr that Bob earned get him 4,000 energy units. However, the 4-room distance requires covering energy costs of 1,600 energy units. This amount should have been in the Bob's terminal prior to the trade deal execution. Charlie gets 2,000 Cr and doesn't spend any energy on the transfer.
+{% note info %}
+L'énergie utilisée pour faire le transfer d'un terminal à un autre est toujours du côté du joueur qui éxecute l'ordre même dans le cas d'achat d'une ressource. Idem pour le temps de recharge du terminal utilisé.
+{% endnote %}
 
-This story results in the following balance shift between the players involved:
+Un ordre ne peut être exécuté tant que le terminal n'a pas les ressources à vendre ou que le joueur n'a pas assez de crédits pour l'achat. L'ordre reste inactif tant que les conditions ne sont pas respectées.
 
-*   Alice (created a buy order, 1000 utrium acid): +200 utrium acid, -500-2000 credits.
-*   Charlie (sell order, energy): -4000 energy, +2000 credits.
-*   Bob (dealer): -200 utrium acid, +4000-60-1600 energy, +2000-2000 credits.
+## Exemples
 
-## NPC Terminals
+Voici quelques exemples pour comprendre ces méchaniques.
 
-All the “highway crossroads” between sectors (i.e. in the rooms W0N0, W10N0, W10N10, etc.) contain neutral NPC Terminals. You can trade with these terminals the same way as with real players using the market interface or the object [`Game.market`](/api/#Game.market). The orders in NPC terminals have limited resources amounts and get replenished according to a set of rules. Although they don’t boast the most competitive prices, they allow you to convert your resource surplus into credits, and vice versa.
+*   Assumons que le joueur Alice créée un ordre d'achat pour 1000 unités d'"utrim acid" au prix de 10 Cr l'unité. Pour créer l'ordre, Alice dois d'abord désigner son terminal dans la salle W1N1 et de suite payer les frais de 500 Cr.
+*   Le joueur Bob découvre l'ordre d'Alice et décide de vendre pour 200 unités d'"utrium acid" de ses réserves. Le terminal de Bob est dans la salle W4N2, donc de 3 salles de distance de celui d'Alice. Cependant, ses dépenses pour envoyer 200 d'unités sera de 60 unités d'énergies. Bob exécute l'échange et 200 d'unités d'"utrium acid" sont automatiquement envoyé de W4N2 vers W1N1, Bob reçoit 2000 Cr et son terminal perd 60 d'unités d'énergies.
+*   Maintenant Bob souhaite dépenser ses crédits et acheter de l'énergie venant du joueur Charlie qui propose une offre de vente dans la salle W1N5 au prix de 0.5 Cr par unité. Les 2000 Cr que Bob a gagné lui permet donc de récupérer 4000 unités d'énergie. Cependant, avec la distance de 4 salles entre les deux terminaux, le coût d'envoie en énergie montera à 1600 unités. Cette quantité dois être présente dans le terminal de Bob pour éxécuter l'échange. Charlie recevra donc 2000 Cr et ne dépensera pas d'énergie pour le transfer.
 
-## Subscription Tokens
+Voici un résumé des échanges entre les joueurs :
 
-There are important objects to trade in Screeps: **Subscription Tokens**. Upon its activation, such a token allows its user to get 60 CPU subscription days in Screeps. A subscription token does not exist as an object in the game world, it belongs to an account and is subject to direct trade between players for credits through the same market orders system but without designating trading terminals.
+*   Alice (création d'un ordre d'achat, 1000 "utrium acid"): +200 utrium acid, -500-2000 credits.
+*   Charlie (création d'un ordre de vente, énergie): -4000 d'énergie, +2000 credits.
+*   Bob (marchant): -200 utrium acid, +4000-60-1600 d'énergie, +2000-2000 credits.
 
-You can buy a subscription token the same way as a regular CPU subscription. It is placed into your account, and you can sell it as a virtual item to another player.
+## Terminaux PNJ
 
-Hence, those players who want to share their resources with others can play Screeps as a free-to-play game! Subscription tokens trading is also possible via the [Steam Community Market](http://steamcommunity.com/market/listings/464350/Subscription%20Token) allowing to trade purchased tokens for real currency using your Steam Wallet.
+Dans les croisement des salles "autoroutes" (ex: W0N0, W10N0, W10N10, etc...) des terminaux géré par le serveur sont présent. Vous pouvez réaliser des échanges avec ces terminaux comme s'ils sont des joueurs en utilisant l'interface du Marché ou l'objet [`Game.market`](/api/#Game.market). Les ordres des terminaux PNJ possèdent des ressources limités et sont réapprovisionné selon certains critères. Ces terminaux ne proposent pas les prix les plus compétitifs mais vous permet de convertir les surplus de ressources en crédits et vice versa.
+
+## Jetons d'abonnements
+
+_(Utilisable seulement sur le serveur Screeps Officiel)_
+
+Il existe d'autres objets échangable dans Screeps : **les Jetons d'abonnements**. L'activation de ce jeton permet d'avoir un jour d'abonnement pour 60 CPU dans Screeps. Un jeton n'est pas un objet physique dans le monde, il existe seulement dans votre compte mais peux être échanger entre joueur pour des crédits à partir du même sytème d'ordre du Marché mais sans utilisé de terminaux.
+
+Vous pouvez aussi acheter des jetons comme l'achat d'abonnement normal. Le jeton sera mis à disposition dans votre compte et pouvez le vendre en temps qu'objet virtuel à un autre joueur.
+
+Les jetons sont aussi échangeable à partir du [Marché de la communauté Steam](http://steamcommunity.com/market/listings/464350/Subscription%20Token) permettant d'en vendre ou d'en acheter avec de l'argent réel.
+
+---
+Page traduite par :
+- [iKlem](https://github.com/iKlem)

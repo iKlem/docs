@@ -1,3 +1,6 @@
+## Note sur cette version du dépôt
+Ce dépôt etait une premiere version du projet de traduction française. Le projet v2 est (normalement) a l'équipe ScreepsFrance.
+
 ## Informations à propos du projet
 Ce projet contiens la traduction française de la documentation officiel de [Screeps](http://docs.screeps.com/)
 
